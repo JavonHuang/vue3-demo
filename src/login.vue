@@ -5,15 +5,27 @@
 </template>
 <script setup lang='ts'>
 import { useRouter } from 'vue-router'
+import {router as myrouter} from './router'
+
+import { request } from './service';
 const router = useRouter()
 
 const login=()=>{
-  router.push({
-    path:"/home",
-    query: {
-    
-    },
-  })
+  request({url:'/api/vue/menu',type:'post',data:{}}).then((e)=>{
+    e.data.forEach((item:any) => {
+      myrouter.addRoute({
+        path:item.url,
+        name: item.name,
+        component:()=>import(item.path)
+      });
+    });
+      router.push({
+      path:"/home_use",
+      query: {
+      
+      },
+    })
+  });
 }
 </script>
 <style scoped>
