@@ -49,21 +49,21 @@ class BaseRequest{
   }
 }
 
-function addInterceptorsRequest(func:Function){
-  return function (target:any) {
-    if(!target.prototype.interceptorsRequestList){
-      target.prototype.interceptorsRequestList=[];
-    }
-    target.prototype.interceptorsRequestList.push(func)
-  }
-}
+// function addInterceptorsRequest(func:Function){
+//   return function (target:any) {
+//     if(!target.prototype.interceptorsRequestList){
+//       target.prototype.interceptorsRequestList=[];
+//     }
+//     target.prototype.interceptorsRequestList.push(func)
+//   }
+// }
 
-function addInterceptorsResponse(func:Function){
-  return function (target:any) {
-    if(!target.prototype.interceptorsResponsetList){
-    target.prototype.interceptorsResponsetList=[];
-    }
-    target.prototype.interceptorsResponsetList.push(func)
-  }
-}
+// function addInterceptorsResponse(func:Function){
+//   return function (target:any) {
+//     if(!target.prototype.interceptorsResponsetList){
+//     target.prototype.interceptorsResponsetList=[];
+//     }
+//     target.prototype.interceptorsResponsetList.push(func)
+//   }
+// }
 export default BaseRequest;
