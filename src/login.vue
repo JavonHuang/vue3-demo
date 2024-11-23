@@ -7,11 +7,11 @@
 import { useRouter } from 'vue-router'
 import {router as myrouter} from './router'
 
-import { request } from './service';
+import request from '@/api/commonApi';
 const router = useRouter()
 
 const login=()=>{
-  request({url:'/api/vue/menu',type:'post',data:{}}).then((e)=>{
+  request.login({name:"",passworld:""}).then((e)=>{
     e.data.forEach((item:any) => {
       myrouter.addRoute({
         path:item.url,

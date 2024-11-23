@@ -1,26 +1,14 @@
-import axios, { AxiosInstance,CreateAxiosDefaults } from 'axios'
-// @addInterceptorsRequest((config:any)=>{
-//   console.log("拦截1")
-//   return config;
-// })
-// @addInterceptorsResponse((config:any)=>{
-//   console.log("响应拦截1")
-//   return config;
-// })
-// @addInterceptorsRequest((config:any)=>{
-//   console.log("拦截2")
-//   return config;
-// })
-// @addInterceptorsResponse((config:any)=>{
-//   console.log("响应拦截2")
-//   return config;
-// })
+import axios, { AxiosInstance,CreateAxiosDefaults,AxiosResponse,InternalAxiosRequestConfig } from 'axios'
+interface IuseInterceptors{
+  request?:(e:InternalAxiosRequestConfig<any>)=>InternalAxiosRequestConfig<any>,
+  requestError?:(error:unknown)=>Promise<any>,
+  response?:(e:AxiosResponse<any, any>)=>AxiosResponse<any, any>,
+  responseError?:(error:unknown)=>Promise<any>,
+}
 class BaseRequest{
   static _instance: BaseRequest;
   protected service: AxiosInstance=axios;
-  protected interceptorsRequestList:Array<any> | undefined;
-  protected interceptorsResponsetList:Array<any> | undefined;
-  constructor(params:CreateAxiosDefaults){
+  constructor(params:CreateAxiosDefaults&IuseInterceptors){
     if(new.target !== BaseRequest){
         return
     }
@@ -28,12 +16,18 @@ class BaseRequest{
         BaseRequest._instance = this
     }
     this.service = axios.create(params);
-    this.interceptorsRequestList?.forEach((item)=>{
-      this.service.interceptors.request.use(item)
-    })
-    this.interceptorsResponsetList?.forEach((item)=>{
-      this.service.interceptors.response.use(item)
-    })
+    if(params.request!=null){
+      this.service.interceptors.request.use(params.request)
+    }
+    if(params.requestError!=null){
+      this.service.interceptors.request.use(null,params.requestError)
+    }
+    if(params.response!=null){
+      this.service.interceptors.response.use(params.response)
+    }
+    if(params.responseError!=null){
+      this.service.interceptors.response.use(null,params.responseError)
+    }
     return BaseRequest._instance
   }
 
@@ -49,21 +43,4 @@ class BaseRequest{
   }
 }
 
-// function addInterceptorsRequest(func:Function){
-//   return function (target:any) {
-//     if(!target.prototype.interceptorsRequestList){
-//       target.prototype.interceptorsRequestList=[];
-//     }
-//     target.prototype.interceptorsRequestList.push(func)
-//   }
-// }
-
-// function addInterceptorsResponse(func:Function){
-//   return function (target:any) {
-//     if(!target.prototype.interceptorsResponsetList){
-//     target.prototype.interceptorsResponsetList=[];
-//     }
-//     target.prototype.interceptorsResponsetList.push(func)
-//   }
-// }
 export default BaseRequest;

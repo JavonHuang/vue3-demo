@@ -1,19 +1,16 @@
 import vue from '@vitejs/plugin-vue'
 import path from 'path';
 import { defineConfig } from 'vite';
+import { vitePluginImportPage } from './vite.user.plugin';
 
-const baseConfig=(env:Record<string, string>)=>{
-  console.log( "参数",env)
-  // const moduleLits:Array<string>=env.VITE_MODULE.split(',');
-  // let externalList:Array<string>=[];
-  // moduleLits.forEach((e:string)=>{
-  //   externalList.push(`src/pages/report`);
-  // })
+const baseConfig=(env:Record<string, string>)=>{ 
+  const deleteModule=env.VITE_EXCLUDE_MODULE==""?[]: env.VITE_EXCLUDE_MODULE.split(',')
   return defineConfig({
     base: './',
     // 通用基础配置项
     plugins: [
       vue(),
+      vitePluginImportPage(deleteModule),
     ],
     resolve: {
       alias: {

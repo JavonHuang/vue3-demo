@@ -1,2 +1,2 @@
-const allModule={};
-export default allModule;
+const allModule:Record<string, () => Promise<unknown>>={}
+export default {...allModule}

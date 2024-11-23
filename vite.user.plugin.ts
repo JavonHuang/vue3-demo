@@ -1,19 +1,39 @@
 import path from "path";
 import fs from 'fs';
-export function vitePluginImportPage(strArr: Array<string>){
+export function vitePluginImportPage(strArr: Array<string>) {
   return {
     name: 'vite-plugin-import-page',
     async buildStart() {
       const distDir = path.resolve(__dirname, `./src/pages`);
 
-      const getSubFolders = (dir:string) => {
+      const getSubFolders = (dir: string) => {
         return fs.readdirSync(dir)
           .filter(file => fs.statSync(path.join(dir, file)).isDirectory())
           .map(folder => folder);
       };
       const subFolders = getSubFolders(distDir);
-      console.log(subFolders.filter(value=>strArr.indexOf(value) === -1));
+      const importModuleList = subFolders.filter(value => strArr.indexOf(value) === -1);
+      console.log(importModuleList)
 
+      const writeStream = fs.createWriteStream(path.resolve(__dirname, `./src/router/module.ts`), 'utf8');
+      let content =''
+      let exportList:Array<string>=[];
+
+      if(importModuleList.length==0){
+        content = 'const allModule:Record<string, () => Promise<unknown>>={}\n';
+        exportList.push(`...allModule`)
+      }
+      
+      importModuleList.forEach((e:string)=>{
+        content=content+`const module_${e} = import.meta.glob('../pages/**/*.vue');\n`
+        exportList.push(`...module_${e}`)
+      })
+      content=content+`export default {${exportList.join(',')}}`
+      writeStream.write(content);
+      writeStream.end();
+      writeStream.on('finish', () => {
+        console.log('File writing finished.');
+      });
     },
   };
 }

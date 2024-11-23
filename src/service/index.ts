@@ -1,5 +1,22 @@
 import BaseRequest from "./baseRequest"
-const baseRequest=new BaseRequest({})
+const baseRequest=new BaseRequest({
+  request:(e)=>{
+    console.log(e)
+    return e;
+  },
+  requestError:(e)=>{
+    console.log(e)
+    return Promise.reject(e);
+  },
+  response:(e)=>{
+    console.log(e)
+    return e;
+  },
+  responseError:(e)=>{
+    console.log(e)
+    return Promise.reject(e);
+  },
+})
 
 const post = (url: string, data: any = {}, config: object = {}): Promise<any> => {
   return new Promise((resolve, reject) => {

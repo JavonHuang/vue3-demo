@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite';
-import { vitePluginDeleteFile,vitePluginImportPage } from './vite.user.plugin';
+import { vitePluginDeleteFile } from './vite.user.plugin';
 
 const prodConfig=(env:Record<string, string>)=>{
   const deleteModule=env.VITE_EXCLUDE_MODULE==""?[]: env.VITE_EXCLUDE_MODULE.split(',')
   return defineConfig({
     plugins:[
-      vitePluginImportPage(deleteModule),
       vitePluginDeleteFile(deleteModule),
     ],
     build: {

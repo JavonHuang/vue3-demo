@@ -1,10 +1,11 @@
 import {createRouter,RouteRecordRaw,createWebHashHistory} from "vue-router"
+import allModule from "./module";
 
-
-const routeFiles = import.meta.glob('../pages/**/*.vue');
-Object.keys(routeFiles).forEach((key) => {
-  routeFiles[key]();
-});
+if(Object.keys(allModule).length>0){
+  Object.keys(allModule).forEach((key:string) => {
+    allModule[key]();
+  });
+}
 const routes: Array<RouteRecordRaw> = [
   {
     path:"/login",
