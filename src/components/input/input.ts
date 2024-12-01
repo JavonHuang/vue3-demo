@@ -5,7 +5,7 @@ import { ElInput } from 'element-plus'
 /** 组件入参 */
 export type Input = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type InputProps = ExtractPropTypes<Input>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyInput: typeof ElInput|typeof SkyInput
+    SkyInput: typeof ElInput & typeof SkyInput
   }
 }

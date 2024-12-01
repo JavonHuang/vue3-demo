@@ -52,6 +52,7 @@ import SkyStatistic from './statistic/statistic.vue'
 import SkySteps from './steps/steps.vue'
 import SkySwitch from './switch/switch.vue'
 import SkyTable from './table/table.vue'
+import SkyTableColumn from './table/tableColumn.vue'
 import SkyTabs from './tabs/tabs.vue'
 import SkyTag from './tag/tag.vue'
 import SkyTimeline from './timeline/timeline.vue'
@@ -122,6 +123,7 @@ const components = [
   SkySteps,
   SkySwitch,
   SkyTable,
+  SkyTableColumn,
   SkyTabs,
   SkyTag,
   SkyTimeline,

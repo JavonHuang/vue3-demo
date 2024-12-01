@@ -5,7 +5,7 @@ import { ElPopconfirm } from 'element-plus'
 /** 组件入参 */
 export type Popover = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type PopoverProps = ExtractPropTypes<Popover>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyPopover: typeof ElPopconfirm|typeof SkyPopover
+    SkyPopover: typeof ElPopconfirm & typeof SkyPopover
   }
 }

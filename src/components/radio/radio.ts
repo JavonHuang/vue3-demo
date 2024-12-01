@@ -5,7 +5,7 @@ import { ElRadio } from 'element-plus'
 /** 组件入参 */
 export type Radio = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type RadioProps = ExtractPropTypes<Radio>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyRadio: typeof ElRadio|typeof SkyRadio
+    SkyRadio: typeof ElRadio & typeof SkyRadio
   }
 }

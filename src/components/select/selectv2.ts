@@ -5,7 +5,7 @@ import { ElSelectV2 } from 'element-plus'
 /** 组件入参 */
 export type SelectV2 = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type SelectV2Props = ExtractPropTypes<SelectV2>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkySelectV2: typeof ElSelectV2|typeof SkySelectV2
+    SkySelectV2: typeof ElSelectV2 & typeof SkySelectV2
   }
 }

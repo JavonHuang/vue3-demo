@@ -5,7 +5,7 @@ import { ElDrawer } from 'element-plus'
 /** 组件入参 */
 export type Drawer = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type DrawerProps = ExtractPropTypes<Drawer>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyDrawer: typeof ElDrawer|typeof SkyDrawer
+    SkyDrawer: typeof ElDrawer & typeof SkyDrawer
   }
 }

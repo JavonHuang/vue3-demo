@@ -11,7 +11,7 @@
 import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTreeV2 } from 'element-plus'
-import 'element-plus/theme-chalk/el-tree-v2.css'
+import 'element-plus/theme-chalk/el-tree.css'
 import { TreeV2Props } from './treeV2';
 
 defineOptions({

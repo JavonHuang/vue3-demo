@@ -5,7 +5,7 @@ import { ElInfiniteScroll } from 'element-plus'
 /** 组件入参 */
 export type InfiniteScroll = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type InfiniteScrollProps = ExtractPropTypes<InfiniteScroll>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyInfiniteScroll: typeof ElInfiniteScroll|typeof SkyInfiniteScroll
+    SkyInfiniteScroll: typeof ElInfiniteScroll & typeof SkyInfiniteScroll
   }
 }

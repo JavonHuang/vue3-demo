@@ -5,7 +5,7 @@ import { ElAffix } from 'element-plus'
 /** 组件入参 */
 export type Backtop = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type BacktopProps = ExtractPropTypes<Backtop>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyBacktop: typeof ElAffix|typeof SkyBacktop
+    SkyBacktop: typeof ElAffix & typeof SkyBacktop
   }
 }

@@ -5,7 +5,7 @@ import { ElDropdown } from 'element-plus'
 /** 组件入参 */
 export type Dropdown = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type DropdownProps = ExtractPropTypes<Dropdown>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyDropdown: typeof ElDropdown|typeof SkyDropdown
+    SkyDropdown: typeof ElDropdown & typeof SkyDropdown
   }
 }

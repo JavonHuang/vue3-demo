@@ -5,7 +5,7 @@ import { ElTreeSelect } from 'element-plus'
 /** 组件入参 */
 export type TreeSelect = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TreeSelectProps = ExtractPropTypes<TreeSelect>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTreeSelect: typeof ElTreeSelect|typeof SkyTreeSelect
+    SkyTreeSelect: typeof ElTreeSelect & typeof SkyTreeSelect
   }
 }

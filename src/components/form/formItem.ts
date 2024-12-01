@@ -5,7 +5,7 @@ import { ElFormItem } from 'element-plus'
 /** 组件入参 */
 export type FormItem = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type FormItemProps = ExtractPropTypes<FormItem>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyFormItem: typeof ElFormItem|typeof SkyFormItem
+    SkyFormItem: typeof ElFormItem & typeof SkyFormItem
   }
 }

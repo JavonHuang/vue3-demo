@@ -1,9 +1,9 @@
-import SkyStatistic from "./statistic.vue"
+import SkyTableColumn from "./tableColumn.vue"
 import { PropType, ExtractPropTypes } from "vue"
-import { ElStatistic } from 'element-plus'
+import { ElTableColumn } from 'element-plus'
 
 /** 组件入参 */
-export type Statistic = {
+export type TableColumn = {
     /** 按钮类型 */
     text?: {
         type: PropType<string>
@@ -12,10 +12,10 @@ export type Statistic = {
 }
 
 /** 组件参数类型 */
-export type StatisticProps = ExtractPropTypes<Statistic>
+export type TableColumnProps = ExtractPropTypes<TableColumn>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyStatistic: typeof ElStatistic & typeof SkyStatistic
+    SkyTableColumn: typeof ElTableColumn & typeof SkyTableColumn
   }
 }

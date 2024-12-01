@@ -5,7 +5,7 @@ import { ElImage } from 'element-plus'
 /** 组件入参 */
 export type Image = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type ImageProps = ExtractPropTypes<Image>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyImage: typeof ElImage|typeof SkyImage
+    SkyImage: typeof ElImage & typeof SkyImage
   }
 }

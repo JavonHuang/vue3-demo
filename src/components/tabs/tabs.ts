@@ -5,7 +5,7 @@ import { ElTabs } from 'element-plus'
 /** 组件入参 */
 export type Tabs = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TabsProps = ExtractPropTypes<Tabs>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTabs: typeof ElTabs|typeof SkyTabs
+    SkyTabs: typeof ElTabs & typeof SkyTabs
   }
 }

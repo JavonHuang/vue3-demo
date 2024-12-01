@@ -5,7 +5,7 @@ import { ElWatermark } from 'element-plus'
 /** 组件入参 */
 export type Watermark = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type WatermarkProps = ExtractPropTypes<Watermark>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyWatermark: typeof ElWatermark|typeof SkyWatermark
+    SkyWatermark: typeof ElWatermark & typeof SkyWatermark
   }
 }

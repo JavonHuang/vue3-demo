@@ -5,7 +5,7 @@ import { ElAutocomplete } from 'element-plus'
 /** 组件入参 */
 export type Avatar = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type AvatarProps = ExtractPropTypes<Avatar>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyAvatar: typeof ElAutocomplete|typeof SkyAvatar
+    SkyAvatar: typeof ElAutocomplete & typeof SkyAvatar
   }
 }

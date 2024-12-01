@@ -5,7 +5,7 @@ import { ElTable } from 'element-plus'
 /** 组件入参 */
 export type Table = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TableProps = ExtractPropTypes<Table>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTable: typeof ElTable|typeof SkyTable
+    SkyTable: typeof ElTable & typeof SkyTable
   }
 }

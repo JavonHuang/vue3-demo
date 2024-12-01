@@ -5,7 +5,7 @@ import { ElPagination } from 'element-plus'
 /** 组件入参 */
 export type Pagination = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type PaginationProps = ExtractPropTypes<Pagination>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyPagination: typeof ElPagination|typeof SkyPagination
+    SkyPagination: typeof ElPagination & typeof SkyPagination
   }
 }

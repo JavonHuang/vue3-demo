@@ -5,7 +5,7 @@ import { ElCard } from 'element-plus'
 /** 组件入参 */
 export type Card = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type CardProps = ExtractPropTypes<Card>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyCard: typeof ElCard|typeof SkyCard
+    SkyCard: typeof ElCard & typeof SkyCard
   }
 }

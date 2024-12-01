@@ -5,7 +5,7 @@ import { ElRate } from 'element-plus'
 /** 组件入参 */
 export type Row = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type RowProps = ExtractPropTypes<Row>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyRow: typeof ElRate|typeof SkyRow
+    SkyRow: typeof ElRate & typeof SkyRow
   }
 }

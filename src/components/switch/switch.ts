@@ -5,7 +5,7 @@ import { ElSwitch } from 'element-plus'
 /** 组件入参 */
 export type Switch = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type SwitchProps = ExtractPropTypes<Switch>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkySwitch: typeof ElSwitch|typeof SkySwitch
+    SkySwitch: typeof ElSwitch & typeof SkySwitch
   }
 }

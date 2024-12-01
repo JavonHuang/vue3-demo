@@ -5,7 +5,7 @@ import { ElCol } from 'element-plus'
 /** 组件入参 */
 export type Collapse = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type CollapseProps = ExtractPropTypes<Collapse>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyCollapse: typeof ElCol|typeof SkyCollapse
+    SkyCollapse: typeof ElCol & typeof SkyCollapse
   }
 }

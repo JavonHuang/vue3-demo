@@ -5,7 +5,7 @@ import { ElAffix } from 'element-plus'
 /** 组件入参 */
 export type Affix = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type AffixProps = ExtractPropTypes<Affix>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyAffix: typeof ElAffix|typeof SkyAffix
+    SkyAffix: typeof ElAffix & typeof SkyAffix
   }
 }

@@ -5,7 +5,7 @@ import { ElMenuItem } from 'element-plus'
 /** 组件入参 */
 export type MenuItem = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type MenuItemProps = ExtractPropTypes<MenuItem>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyMenuItem: typeof ElMenuItem|typeof SkyMenuItem
+    SkyMenuItem: typeof ElMenuItem & typeof SkyMenuItem
   }
 }

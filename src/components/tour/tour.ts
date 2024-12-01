@@ -5,7 +5,7 @@ import { ElTour } from 'element-plus'
 /** 组件入参 */
 export type Tour = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TourProps = ExtractPropTypes<Tour>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTour: typeof ElTour|typeof SkyTour
+    SkyTour: typeof ElTour & typeof SkyTour
   }
 }

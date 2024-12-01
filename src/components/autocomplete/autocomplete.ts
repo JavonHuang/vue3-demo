@@ -5,7 +5,7 @@ import { ElAutocomplete } from 'element-plus'
 /** 组件入参 */
 export type Autocomplete = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type AutocompleteProps = ExtractPropTypes<Autocomplete>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyAutocomplete: typeof ElAutocomplete|typeof SkyAutocomplete
+    SkyAutocomplete: typeof ElAutocomplete & typeof SkyAutocomplete
   }
 }

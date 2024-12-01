@@ -5,7 +5,7 @@ import { ElTransfer } from 'element-plus'
 /** 组件入参 */
 export type Transfer = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TransferProps = ExtractPropTypes<Transfer>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTransfer: typeof ElTransfer|typeof SkyTransfer
+    SkyTransfer: typeof ElTransfer & typeof SkyTransfer
   }
 }

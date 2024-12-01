@@ -5,7 +5,7 @@ import { ElPageHeader } from 'element-plus'
 /** 组件入参 */
 export type Steps = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type StepsProps = ExtractPropTypes<Steps>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkySteps: typeof ElPageHeader|typeof SkySteps
+    SkySteps: typeof ElPageHeader & typeof SkySteps
   }
 }

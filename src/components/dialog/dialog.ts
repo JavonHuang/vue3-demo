@@ -5,7 +5,7 @@ import { ElAlert } from 'element-plus'
 /** 组件入参 */
 export type Dialog = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type DialogProps = ExtractPropTypes<Dialog>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyDialog: typeof ElAlert|typeof SkyDialog
+    SkyDialog: typeof ElAlert & typeof SkyDialog
   }
 }

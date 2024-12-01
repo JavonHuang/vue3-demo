@@ -5,7 +5,7 @@ import { ElTag } from 'element-plus'
 /** 组件入参 */
 export type Tag = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TagProps = ExtractPropTypes<Tag>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTag: typeof ElTag|typeof SkyTag
+    SkyTag: typeof ElTag & typeof SkyTag
   }
 }

@@ -11,6 +11,6 @@ export type CheckboxProps = ExtractPropTypes<Checkbox>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyCheckbox: typeof ElCheckbox|typeof SkyCheckbox
+    SkyCheckbox: typeof ElCheckbox & typeof SkyCheckbox
   }
 }

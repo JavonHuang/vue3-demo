@@ -2,7 +2,7 @@
   <div 
   :class="cls">
   <sky-form>
-    <sky-form-item v-for="item in props.columns">
+    <sky-form-item v-for="item in props.columns" :label="item.label" :prop="item.prop">
       <component :is="item.type" v-bind="item.props" v-model="item.props.value"></component>
     </sky-form-item>
   </sky-form>

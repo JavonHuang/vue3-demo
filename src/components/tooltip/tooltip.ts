@@ -5,7 +5,7 @@ import { ElTooltip } from 'element-plus'
 /** 组件入参 */
 export type Tooltip = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TooltipProps = ExtractPropTypes<Tooltip>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTooltip: typeof ElTooltip|typeof SkyTooltip
+    SkyTooltip: typeof ElTooltip & typeof SkyTooltip
   }
 }

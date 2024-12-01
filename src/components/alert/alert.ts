@@ -5,7 +5,7 @@ import { ElAlert } from 'element-plus'
 /** 组件入参 */
 export type Alert = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type AlertProps = ExtractPropTypes<Alert>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyAlert: typeof ElAlert|typeof SkyAlert
+    SkyAlert: typeof ElAlert & typeof SkyAlert
   }
 }

@@ -5,7 +5,7 @@ import { ElRate } from 'element-plus'
 /** 组件入参 */
 export type Rate = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type RateProps = ExtractPropTypes<Rate>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyRate: typeof ElRate|typeof SkyRate
+    SkyRate: typeof ElRate & typeof SkyRate
   }
 }

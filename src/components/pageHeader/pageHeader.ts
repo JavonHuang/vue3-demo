@@ -5,7 +5,7 @@ import { ElPageHeader } from 'element-plus'
 /** 组件入参 */
 export type PageHeader = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type PageHeaderProps = ExtractPropTypes<PageHeader>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyPageHeader: typeof ElPageHeader|typeof SkyPageHeader
+    SkyPageHeader: typeof ElPageHeader & typeof SkyPageHeader
   }
 }

@@ -12,6 +12,8 @@ type columnType='SkyInput'|'SkyDatePicker';
 
 export  interface QueryColumnsProps{
   type:columnType,
+  label:string,
+  prop:string,
   props:{
     [key: string]: any;
   }

@@ -5,7 +5,7 @@ import { ElTreeV2 } from 'element-plus'
 /** 组件入参 */
 export type TreeV2 = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type TreeV2Props = ExtractPropTypes<TreeV2>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyTreeV2: typeof ElTreeV2|typeof SkyTreeV2
+    SkyTreeV2: typeof ElTreeV2 & typeof SkyTreeV2
   }
 }

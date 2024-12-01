@@ -5,7 +5,7 @@ import { ElMention } from 'element-plus'
 /** 组件入参 */
 export type Mention = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type MentionProps = ExtractPropTypes<Mention>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyMention: typeof ElMention|typeof SkyMention
+    SkyMention: typeof ElMention & typeof SkyMention
   }
 }

@@ -5,7 +5,7 @@ import { ElIcon } from 'element-plus'
 /** 组件入参 */
 export type Icon = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type IconProps = ExtractPropTypes<Icon>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyIcon: typeof ElIcon|typeof SkyIcon
+    SkyIcon: typeof ElIcon & typeof SkyIcon
   }
 }

@@ -5,7 +5,7 @@ import { ElCarousel } from 'element-plus'
 /** 组件入参 */
 export type Carousel = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type CarouselProps = ExtractPropTypes<Carousel>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyCarousel: typeof ElCarousel|typeof SkyCarousel
+    SkyCarousel: typeof ElCarousel & typeof SkyCarousel
   }
 }

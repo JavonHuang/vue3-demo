@@ -5,7 +5,7 @@ import { ElEmpty } from 'element-plus'
 /** 组件入参 */
 export type Empty = {
     /** 按钮类型 */
-    text: {
+    text?: {
         type: PropType<string>
         required: false;
     }
@@ -16,6 +16,6 @@ export type EmptyProps = ExtractPropTypes<Empty>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyEmpty: typeof ElEmpty|typeof SkyEmpty
+    SkyEmpty: typeof ElEmpty & typeof SkyEmpty
   }
 }
