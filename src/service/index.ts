@@ -1,19 +1,19 @@
 import BaseRequest from "./baseRequest"
 const baseRequest=new BaseRequest({
   request:(e)=>{
-    console.log(e)
+    // console.log(e)
     return e;
   },
   requestError:(e)=>{
-    console.log(e)
+    // console.log(e)
     return Promise.reject(e);
   },
   response:(e)=>{
-    console.log(e)
+    // console.log(e)
     return e;
   },
   responseError:(e)=>{
-    console.log(e)
+    // console.log(e)
     return Promise.reject(e);
   },
 })

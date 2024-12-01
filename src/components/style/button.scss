@@ -1,0 +1,27 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+$buttonType:(primary, success, warning, danger, info);
+$buttonSize:(large,default,small);
+.el-button{
+  @include base(button) {
+    padding: 0;
+    @each $type in $buttonType {
+      $color1:map.get($colors, $type, 'base');
+
+      @include m($type) {
+        background-color: $color1;
+      }
+    }
+    @each $size in $buttonSize {
+      $sizeMap:map.get($skySize, $size);
+      @include m($size) {
+        @each $key, $value in $sizeMap {
+          #{$key}: $value;
+        }      
+      }
+    }
+  }
+}
+
+

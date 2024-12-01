@@ -1,0 +1,20 @@
+@use 'config' as *;
+@use 'sass:string';
+@use 'sass:map';
+@use '../common/var' as *;
+
+$B: null;
+
+@mixin base($block) {
+  $B: $namespace + $common-separator + $block !global;
+  &.#{$B} {
+    @content;
+  }
+}
+
+@mixin m($modifier) {
+  $B: $namespace + $common-separator;
+  &.#{$B}is-#{$modifier} {
+    @content;
+  }
+}
