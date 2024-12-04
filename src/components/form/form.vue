@@ -1,28 +1,36 @@
 <template>
   <el-form
-    v-bind="$attrs"
+    v-bind="props"
     :class="cls"
+    ref="tform"
   >
     <slot></slot>
   </el-form>
 </template>
 
 <script setup lang='ts'>
-import {defineOptions,computed } from 'vue'
+import {defineOptions,computed, ref } from 'vue'
 import {useName} from "../hook/useName"
 import { ElForm } from 'element-plus'
 import 'element-plus/theme-chalk/el-form.css'
-import { FormProps } from './form';
+import type { FormProps } from 'element-plus';
+
+type IProps={
+  [key: string]: any;
+} & FormProps
 
 defineOptions({
-  name:'SkyForm'
+  name:'ThForm'
 })
-defineProps<FormProps>()
+const props=defineProps<IProps>()
+const tform: any = ref<HTMLElement | null>(null)
 
 const ns = useName('form')
 const cls = computed(() => [
   ns.base(),
+  ns.m(props ?'inline':''),
 ])
+defineExpose(tform);
 </script>
 
 <style lang='scss' scoped>

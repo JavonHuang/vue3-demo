@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElPopconfirm } from 'element-plus'
 import 'element-plus/theme-chalk/el-popconfirm.css'
-import { PopconfirmProps } from './popconfirm';
 
 defineOptions({
-  name:'SkyPopconfirm'
+  name:'ThPopconfirm'
 })
-defineProps<PopconfirmProps>()
+defineProps()
 
 const ns = useName('popconfirm')
 const cls = computed(() => [

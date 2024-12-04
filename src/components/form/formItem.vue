@@ -12,16 +12,22 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElFormItem } from 'element-plus'
 import 'element-plus/theme-chalk/el-form-item.css'
-import { FormItemProps } from './formItem';
 
 defineOptions({
-  name:'SkyFormItem'
+  name:'ThFormItem'
 })
-defineProps<FormItemProps>()
+const props=defineProps({
+  inline:{
+    type:Boolean,
+    default:false,
+  }
+})
 
 const ns = useName('form-item')
 const cls = computed(() => [
   ns.base(),
+  ns.m(props.inline?'inline':''),
+
 ])
 </script>
 

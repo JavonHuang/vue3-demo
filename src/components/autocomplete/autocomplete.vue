@@ -11,12 +11,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElAutocomplete } from 'element-plus'
 import 'element-plus/theme-chalk/el-autocomplete.css'
-import { AutocompleteProps } from './autocomplete';
 
 defineOptions({
-  name:'SkyAutocomplete'
+  name:'ThAutocomplete'
 })
-defineProps<AutocompleteProps>()
+defineProps()
 const ns = useName('autocomplete')
 const cls = computed(() => [
   ns.base(),

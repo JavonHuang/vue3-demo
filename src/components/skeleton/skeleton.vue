@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElSkeleton } from 'element-plus'
 import 'element-plus/theme-chalk/el-skeleton.css'
-import { SkeletonProps } from './skeleton';
 
 defineOptions({
-  name:'SkySkeleton'
+  name:'ThSkeleton'
 })
-defineProps<SkeletonProps>()
+defineProps()
 
 const ns = useName('skeleton')
 const cls = computed(() => [

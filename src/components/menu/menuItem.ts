@@ -1,4 +1,4 @@
-import SkyMenuItem from "./menuItem.vue"
+import ThMenuItem from "./menuItem.vue"
 import { PropType, ExtractPropTypes } from "vue"
 import { ElMenuItem } from 'element-plus'
 
@@ -16,6 +16,6 @@ export type MenuItemProps = ExtractPropTypes<MenuItem>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    SkyMenuItem: typeof ElMenuItem & typeof SkyMenuItem
+    ThMenuItem: typeof ElMenuItem & typeof ThMenuItem
   }
 }

@@ -10,12 +10,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTableV2 } from 'element-plus'
 import 'element-plus/theme-chalk/el-table-v2.css'
-import { TableV2Props } from './tableV2';
 
 defineOptions({
-  name:'SkyTableV2'
+  name:'ThTableV2'
 })
-defineProps<TableV2Props>()
+defineProps()
 
 const ns = useName('table-v2')
 const cls = computed(() => [

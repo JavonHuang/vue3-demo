@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTooltip } from 'element-plus'
 import 'element-plus/theme-chalk/el-tooltip.css'
-import { TooltipProps } from './tooltip';
 
 defineOptions({
-  name:'SkyTooltip'
+  name:'ThTooltip'
 })
-defineProps<TooltipProps>()
+defineProps()
 
 const ns = useName('tooltip')
 const cls = computed(() => [

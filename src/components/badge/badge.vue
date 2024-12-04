@@ -12,12 +12,11 @@ import { computed,defineOptions,defineProps } from 'vue'
 import {useName} from "../hook/useName"
 import { ElBadge } from 'element-plus'
 import 'element-plus/theme-chalk/el-badge.css'
-import { BadgeProps } from './badge'
 
 defineOptions({
-  name:'SkyAnchor'
+  name:'ThBadge'
 })
-defineProps<BadgeProps>()
+defineProps()
 const ns = useName('anchor')
 
 const cls = computed(() => [

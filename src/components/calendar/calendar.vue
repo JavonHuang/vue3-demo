@@ -12,12 +12,11 @@ import { computed,defineOptions,defineProps } from 'vue'
 import {useName} from "../hook/useName"
 import { ElCalendar } from 'element-plus'
 import 'element-plus/theme-chalk/el-calendar.css'
-import { CalendarProps } from './calendar'
 
 defineOptions({
-  name:'SkyCalendar'
+  name:'ThCalendar'
 })
-defineProps<CalendarProps>()
+defineProps()
 const ns = useName('calendar')
 
 const cls = computed(() => [

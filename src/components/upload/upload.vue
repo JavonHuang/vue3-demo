@@ -10,12 +10,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElUpload } from 'element-plus'
 import 'element-plus/theme-chalk/el-upload.css'
-import { UploadProps } from './upload';
 
 defineOptions({
-  name:'SkyUpload'
+  name:'ThUpload'
 })
-defineProps<UploadProps>()
+defineProps()
 
 const ns = useName('upload')
 const cls = computed(() => [

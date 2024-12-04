@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTour } from 'element-plus'
 import 'element-plus/theme-chalk/el-tour.css'
-import { TourProps } from './tour';
 
 defineOptions({
-  name:'SkyTour'
+  name:'ThTour'
 })
-defineProps<TourProps>()
+defineProps()
 
 const ns = useName('tour')
 const cls = computed(() => [

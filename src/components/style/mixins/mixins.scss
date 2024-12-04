@@ -7,14 +7,39 @@ $B: null;
 
 @mixin base($block) {
   $B: $namespace + $common-separator + $block !global;
-  &.#{$B} {
-    @content;
+  @if(&==null){
+    .#{$B} {
+      @content;
+    }
+  }@else{
+    &.#{$B} {
+      @content;
+    }
   }
 }
 
 @mixin m($modifier) {
   $B: $namespace + $common-separator;
-  &.#{$B}is-#{$modifier} {
-    @content;
+  @if(&==null){
+    #{$modifier} {
+      @content;
+    }
+  }@else{
+    &-#{$modifier} {
+      @content;
+    }
+  }
+}
+
+@mixin is($modifier) {
+  $B: $namespace + $common-separator;
+  @if(&==null){
+    .#{$B}is-#{$modifier} {
+      @content;
+    }
+  }@else{
+    &.#{$B}is-#{$modifier} {
+      @content;
+    }
   }
 }

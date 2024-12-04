@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElDescriptionsItem } from 'element-plus'
 import 'element-plus/theme-chalk/el-descriptions-item.css'
-import { DescriptionsItemProps } from './descriptionsItem';
 
 defineOptions({
-  name:'SkyDescriptionsItem'
+  name:'ThDescriptionsItem'
 })
-defineProps<DescriptionsItemProps>()
+defineProps()
 
 const ns = useName('descriptions-item')
 const cls = computed(() => [

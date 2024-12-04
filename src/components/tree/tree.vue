@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTree } from 'element-plus'
 import 'element-plus/theme-chalk/el-tree.css'
-import { TreeProps } from './tree';
 
 defineOptions({
-  name:'SkyTour'
+  name:'ThTree'
 })
-defineProps<TreeProps>()
+defineProps()
 
 const ns = useName('tree')
 const cls = computed(() => [

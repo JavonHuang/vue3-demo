@@ -1,10 +1,9 @@
 <template>
   <div class="login">
     <div class="main">
-      <sky-input v-model="useInfo.name" :prefix-icon="User" placeholder="请输入用户名"></sky-input>
-      <sky-input v-model="useInfo.passworld" type="password" :prefix-icon="Lock" placeholder="请输入密码"></sky-input>
-      <sky-button type="primary" v-on:click="login">登陆</sky-button>
-      <sky-button>88989</sky-button>
+      <th-input v-model="useInfo.name" :prefix-icon="User" placeholder="请输入用户名"></th-input>
+      <th-input v-model="useInfo.passworld" type="password" :prefix-icon="Lock" placeholder="请输入密码"></th-input>
+      <th-button type="primary" :size="'small'" v-on:click="login">登陆</th-button>
     </div>
   </div>
 </template>

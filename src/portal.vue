@@ -3,14 +3,14 @@
     <div class="header">879</div>
     <div class="main">
       <div class="menu">
-        <sky-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-          <sky-menu-item v-for="item in systemMenu" :index="item.name" v-on:click="goPage(item)">
-            <sky-icon>
+        <th-menu default-active="2" class="th-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+          <th-menu-item v-for="item in systemMenu" :index="item.name" v-on:click="goPage(item)">
+            <th-icon>
               <Document />
-            </sky-icon>
+            </th-icon>
             <span>{{ item.name }}</span>
-          </sky-menu-item>
-        </sky-menu>
+          </th-menu-item>
+        </th-menu>
       </div>
       <div class="contant">
         <RouterView ></RouterView>
@@ -64,7 +64,7 @@ const goPage = (e: any) => {
       width: 200px;
       border-right: 1px solid #DCDFE6;
       background-color: white;
-      .el-menu {
+      .th-menu {
         border: none;
       }
     }

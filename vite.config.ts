@@ -10,13 +10,10 @@ export default ({ command,mode }:{command:string,mode:string}) => {
   if(command=="serve"){
   return defineConfig(mergeConfig(baseConfig(env),devConfig))
   }else{
-    return defineConfig(mergeConfig(baseConfig(env),prodConfig(env)))
+    if(mode!='lib'){
+      return defineConfig(mergeConfig(baseConfig(env),prodConfig(env)))
+    }else{
+      return defineConfig(mergeConfig(baseConfig(env),prodConfig(env)))
+    }
   }
-}
-
-
-
-// 在Vite构建完成后调用删除文件夹的函数
-export function onBuildComplete() {
-  console.log("onBuildComplete")
 }

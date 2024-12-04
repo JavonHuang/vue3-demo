@@ -9,11 +9,10 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElIcon } from 'element-plus'
 import 'element-plus/theme-chalk/el-icon.css'
-import { IconProps } from './icon';
 defineOptions({
-  name:'SkyIcon'
+  name:'ThIcon'
 })
-defineProps<IconProps>()
+defineProps()
 
 const ns = useName('row')
 const cls = computed(() => [

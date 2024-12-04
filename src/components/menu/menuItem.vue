@@ -10,7 +10,7 @@ import {useName} from "../hook/useName"
 import { ElMenuItem } from 'element-plus'
 import 'element-plus/theme-chalk/el-menu-item.css'
 defineOptions({
-  name:'SkyMenuItem'
+  name:'ThMenuItem'
 })
 const ns = useName('row')
 const cls = computed(() => [

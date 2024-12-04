@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTimeline } from 'element-plus'
 import 'element-plus/theme-chalk/el-timeline.css'
-import { TimelineProps } from './timeline';
 
 defineOptions({
-  name:'SkyTimeline'
+  name:'ThTimeline'
 })
-defineProps<TimelineProps>()
+defineProps()
 const ns = useName('timeline')
 const cls = computed(() => [
   ns.base(),

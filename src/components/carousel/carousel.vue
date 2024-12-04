@@ -12,12 +12,11 @@ import { computed,defineOptions,defineProps } from 'vue'
 import {useName} from "../hook/useName"
 import { ElCarousel} from 'element-plus'
 import 'element-plus/theme-chalk/el-carousel.css'
-import { CarouselProps } from './carousel'
 
 defineOptions({
-  name:'SkyCarousel'
+  name:'ThCarousel'
 })
-defineProps<CarouselProps>()
+defineProps()
 const ns = useName('carousel')
 
 const cls = computed(() => [

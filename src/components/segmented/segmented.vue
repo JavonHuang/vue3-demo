@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElSegmented } from 'element-plus'
 import 'element-plus/theme-chalk/el-segmented.css'
-import { SegmentedProps } from './segmented';
 
 defineOptions({
-  name:'SkySegmented'
+  name:'ThSegmented'
 })
-defineProps<SegmentedProps>()
+defineProps()
 
 const ns = useName('Segmented')
 const cls = computed(() => [

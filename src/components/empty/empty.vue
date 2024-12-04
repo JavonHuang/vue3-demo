@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElEmpty } from 'element-plus'
 import 'element-plus/theme-chalk/el-empty.css'
-import { EmptyProps } from './empty';
 
 defineOptions({
-  name:'SkyEmpty'
+  name:'ThEmpty'
 })
-defineProps<EmptyProps>()
+defineProps()
 
 const ns = useName('empty')
 const cls = computed(() => [

@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElInfiniteScroll} from 'element-plus'
 import 'element-plus/theme-chalk/el-image.css'
-import { InfiniteScrollProps } from './infiniteScroll';
 
 defineOptions({
-  name:'SkyInfiniteScroll'
+  name:'ThInfiniteScroll'
 })
-defineProps<InfiniteScrollProps>()
+defineProps()
 
 const ns = useName('infinite-scroll')
 const cls = computed(() => [

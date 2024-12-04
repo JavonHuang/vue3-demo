@@ -1,1 +1,1 @@
-export const LIB_NAME = "sky"
+export const LIB_NAME = "th"

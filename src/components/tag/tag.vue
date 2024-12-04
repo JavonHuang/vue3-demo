@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTag } from 'element-plus'
 import 'element-plus/theme-chalk/el-tag.css'
-import { TagProps } from './tag';
 
 defineOptions({
-  name:'SkyTag'
+  name:'ThTag'
 })
-defineProps<TagProps>()
+defineProps()
 const ns = useName('tag')
 const cls = computed(() => [
   ns.base(),

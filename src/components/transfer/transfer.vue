@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTransfer } from 'element-plus'
 import 'element-plus/theme-chalk/el-transfer.css'
-import { TransferProps } from './transfer';
 
 defineOptions({
-  name:'SkyTransfer'
+  name:'ThTransfer'
 })
-defineProps<TransferProps>()
+defineProps()
 
 const ns = useName('transfer')
 const cls = computed(() => [

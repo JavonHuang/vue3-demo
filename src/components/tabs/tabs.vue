@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTabs } from 'element-plus'
 import 'element-plus/theme-chalk/el-tabs.css'
-import { TabsProps } from './tabs';
 
 defineOptions({
-  name:'SkyTabs'
+  name:'ThTabs'
 })
-defineProps<TabsProps>()
+defineProps()
 const ns = useName('tabs')
 const cls = computed(() => [
   ns.base(),

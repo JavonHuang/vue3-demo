@@ -30,23 +30,23 @@ $colors: map.deep-merge(
   $colors
 );
 
-$skySize: () !default;
-$skySize: map.deep-merge(
+$thSize: () !default;
+$thSize: map.deep-merge(
   (
     'large': (
       'height': 40px,
-      'padding':0px 8px,
+      'padding':0px 16px,
     ),
     'default': (
       'height': 32px,
-      'padding':0px 8px,
+      'padding':0px 12px,
     ),
     'small': (
       'height': 28px,
       'padding':0px 8px,
     ),
   ),
-  $skySize
+  $thSize
 );
 
 

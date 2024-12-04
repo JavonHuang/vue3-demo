@@ -9,13 +9,13 @@ $buttonSize:(large,default,small);
     @each $type in $buttonType {
       $color1:map.get($colors, $type, 'base');
 
-      @include m($type) {
+      @include is($type) {
         background-color: $color1;
       }
     }
     @each $size in $buttonSize {
-      $sizeMap:map.get($skySize, $size);
-      @include m($size) {
+      $sizeMap:map.get($thSize, $size);
+      @include is($size) {
         @each $key, $value in $sizeMap {
           #{$key}: $value;
         }      

@@ -1,21 +1,3 @@
-import SkyPageHeader from "./pageHeader.vue"
-import { PropType, ExtractPropTypes } from "vue"
+import ThPageHeader from "./pageHeader.vue"
 import { ElPageHeader } from 'element-plus'
-
-/** 组件入参 */
-export type PageHeader = {
-    /** 按钮类型 */
-    text?: {
-        type: PropType<string>
-        required: false;
-    }
-}
-
-/** 组件参数类型 */
-export type PageHeaderProps = ExtractPropTypes<PageHeader>
-
-declare module 'vue' {
-  export interface GlobalComponents {
-    SkyPageHeader: typeof ElPageHeader & typeof SkyPageHeader
-  }
-}
+export type ThPageHeader = typeof ElPageHeader & typeof ThPageHeader

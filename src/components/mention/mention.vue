@@ -10,12 +10,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElMention } from 'element-plus'
 import 'element-plus/theme-chalk/el-mention.css'
-import { MentionProps } from './mention';
 
 defineOptions({
-  name:'SkyMention'
+  name:'ThMention'
 })
-defineProps<MentionProps>()
+defineProps()
 
 const ns = useName('el-mention')
 const cls = computed(() => [

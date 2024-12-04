@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTableColumn } from 'element-plus'
 import 'element-plus/theme-chalk/el-table-column.css'
-import { TableColumnProps } from './tableColumn';
 
 defineOptions({
-  name:'SkyTableColumn'
+  name:'ThTableColumn'
 })
-defineProps<TableColumnProps>()
+defineProps()
 const ns = useName('table-column')
 const cls = computed(() => [
   ns.base(),

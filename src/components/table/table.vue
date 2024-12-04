@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTable } from 'element-plus'
 import 'element-plus/theme-chalk/el-table.css'
-import { TableProps } from './table';
 
 defineOptions({
-  name:'SkyTable'
+  name:'ThTable'
 })
-defineProps<TableProps>()
+defineProps()
 const ns = useName('table')
 const cls = computed(() => [
   ns.base(),

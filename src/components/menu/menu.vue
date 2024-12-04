@@ -9,11 +9,10 @@ import {defineOptions,computed } from 'vue'
 import { ElMenu } from 'element-plus'
 import {useName} from "../hook/useName"
 import 'element-plus/theme-chalk/el-menu.css'
-import { MenuProps } from './menu';
 defineOptions({
-  name:'SkyMenu'
+  name:'ThMenu'
 })
-defineProps<MenuProps>()
+defineProps()
 
 const ns = useName('row')
 const cls = computed(() => [

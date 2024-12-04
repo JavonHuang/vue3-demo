@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTimeSelect } from 'element-plus'
 import 'element-plus/theme-chalk/el-time-select.css'
-import { TimeSelectProps } from './timeSelect';
 
 defineOptions({
-  name:'SkyTimeSelect'
+  name:'ThTimeSelect'
 })
-defineProps<TimeSelectProps>()
+defineProps()
 
 const ns = useName('time-select')
 const cls = computed(() => [

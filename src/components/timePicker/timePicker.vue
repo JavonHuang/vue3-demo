@@ -10,12 +10,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTimePicker } from 'element-plus'
 import 'element-plus/theme-chalk/el-time-picker.css'
-import { TimePickerProps } from './timePicker';
 
 defineOptions({
-  name:'SkyTimePicker'
+  name:'ThTimePicker'
 })
-defineProps<TimePickerProps>()
+defineProps()
 const ns = useName('time-picker')
 const cls = computed(() => [
   ns.base(),

@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElDialog } from 'element-plus'
 import 'element-plus/theme-chalk/el-dialog.css'
-import { DialogProps } from './dialog';
 
 defineOptions({
-  name:'SkyDialog'
+  name:'ThDialog'
 })
-defineProps<DialogProps>()
+defineProps()
 
 const ns = useName('dialog')
 const cls = computed(() => [

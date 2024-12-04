@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElWatermark } from 'element-plus'
 import 'element-plus/theme-chalk/el-tooltip.css'
-import { WatermarkProps } from './watermark';
 
 defineOptions({
-  name:'SkyWatermark'
+  name:'ThWatermark'
 })
-defineProps<WatermarkProps>()
+defineProps()
 
 const ns = useName('watermark')
 const cls = computed(() => [

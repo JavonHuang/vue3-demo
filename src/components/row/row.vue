@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElRow } from 'element-plus'
 import 'element-plus/theme-chalk/el-row.css'
-import { RowProps } from './row';
 
 defineOptions({
-  name:'SkyRow'
+  name:'ThRow'
 })
-defineProps<RowProps>()
+defineProps()
 const ns = useName('row')
 const cls = computed(() => [
   ns.base(),

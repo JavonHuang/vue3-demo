@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElSlider } from 'element-plus'
 import 'element-plus/theme-chalk/el-slider.css'
-import { SliderProps } from './slider';
 
 defineOptions({
-  name:'SkySlider'
+  name:'ThSlider'
 })
-defineProps<SliderProps>()
+defineProps()
 const ns = useName('slider')
 const cls = computed(() => [
   ns.base(),

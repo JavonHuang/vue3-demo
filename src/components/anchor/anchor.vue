@@ -11,12 +11,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElAnchor} from 'element-plus'
 import 'element-plus/theme-chalk/el-anchor.css'
-import { AnchorProps } from './anchor';
 
 defineOptions({
-  name:'SkyAnchor'
+  name:'ThAnchor'
 })
-defineProps<AnchorProps>()
+defineProps()
 const ns = useName('anchor')
 const cls = computed(() => [
   ns.base(),

@@ -10,12 +10,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElInput } from 'element-plus'
 import 'element-plus/theme-chalk/el-input.css'
-import { InputProps } from './input';
 
 defineOptions({
-  name:'SkyInput'
+  name:'ThInput'
 })
-defineProps<InputProps>()
+defineProps()
 const ns = useName('input')
 const cls = computed(() => [
   ns.base(),

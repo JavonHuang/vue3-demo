@@ -11,12 +11,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElCollapse } from 'element-plus'
 import 'element-plus/theme-chalk/el-collapse.css'
-import { CollapseProps } from './collapse';
 
 defineOptions({
-  name:'SkyCollapse'
+  name:'ThCollapse'
 })
-defineProps<CollapseProps>()
+defineProps()
 const ns = useName('collapse')
 const cls = computed(() => [
   ns.base(),

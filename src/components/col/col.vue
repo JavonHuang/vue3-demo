@@ -11,12 +11,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElCol } from 'element-plus'
 import 'element-plus/theme-chalk/el-col.css'
-import { ColProps } from './col';
 
 defineOptions({
-  name:'SkyCol'
+  name:'ThCol'
 })
-defineProps<ColProps>()
+defineProps()
 
 const ns = useName('col')
 const cls = computed(() => [

@@ -11,12 +11,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElDropdownItem} from 'element-plus'
 import 'element-plus/theme-chalk/el-dropdown-item.css'
-import { DropdownItemProps } from './dropdownItem';
 
 defineOptions({
-  name:'SkyDropdownItem'
+  name:'ThDropdownItem'
 })
-defineProps<DropdownItemProps>()
+defineProps()
 const ns = useName('dropdown-item')
 const cls = computed(() => [
   ns.base(),

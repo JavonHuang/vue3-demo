@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElSwitch } from 'element-plus'
 import 'element-plus/theme-chalk/el-switch.css'
-import { SwitchProps } from './switch';
 
 defineOptions({
-  name:'SkySwitch'
+  name:'ThSwitch'
 })
-defineProps<SwitchProps>()
+defineProps()
 const ns = useName('switch')
 const cls = computed(() => [
   ns.base(),

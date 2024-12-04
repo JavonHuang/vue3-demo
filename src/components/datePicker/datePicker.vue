@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElDatePicker } from 'element-plus'
 import 'element-plus/theme-chalk/el-date-picker.css'
-import { DatePickerProps } from './datePicker';
 
 defineOptions({
-  name:'SkyDatePicker'
+  name:'ThDatePicker'
 })
-defineProps<DatePickerProps>()
+defineProps()
 
 const ns = useName('date-picker')
 const cls = computed(() => [

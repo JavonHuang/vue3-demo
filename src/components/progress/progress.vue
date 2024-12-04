@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElProgress } from 'element-plus'
 import 'element-plus/theme-chalk/el-progress.css'
-import { ProgressProps } from './progress';
 
 defineOptions({
-  name:'SkyProgress'
+  name:'ThProgress'
 })
-defineProps<ProgressProps>()
+defineProps()
 
 const ns = useName('progress')
 const cls = computed(() => [

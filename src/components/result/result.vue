@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElResult } from 'element-plus'
 import 'element-plus/theme-chalk/el-result.css'
-import { ResultProps } from './result';
 
 defineOptions({
-  name:'SkyResult'
+  name:'ThResult'
 })
-defineProps<ResultProps>()
+defineProps()
 
 const ns = useName('result')
 const cls = computed(() => [

@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElRate } from 'element-plus'
 import 'element-plus/theme-chalk/el-rate.css'
-import { RateProps } from './rate';
 
 defineOptions({
-  name:'SkyRate'
+  name:'ThRate'
 })
-defineProps<RateProps>()
+defineProps()
 
 const ns = useName('rate')
 const cls = computed(() => [

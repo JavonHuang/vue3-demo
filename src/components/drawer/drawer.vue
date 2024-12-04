@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElDrawer } from 'element-plus'
 import 'element-plus/theme-chalk/el-drawer.css'
-import { DrawerProps } from './drawer';
 
 defineOptions({
-  name:'SkyDialog'
+  name:'ThDrawer'
 })
-defineProps<DrawerProps>()
+defineProps()
 
 const ns = useName('drawer')
 const cls = computed(() => [

@@ -11,12 +11,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElCheckbox } from 'element-plus'
 import 'element-plus/theme-chalk/el-checkbox.css'
-import { CheckboxProps } from './checkbox';
 
 defineOptions({
-  name:'SkyCheckbox'
+  name:'ThCheckbox'
 })
-defineProps<CheckboxProps>()
+defineProps()
 const ns = useName('checkbox')
 const cls = computed(() => [
   ns.base(),

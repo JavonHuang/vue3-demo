@@ -12,12 +12,11 @@ import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElPagination } from 'element-plus'
 import 'element-plus/theme-chalk/el-image.css'
-import { PaginationProps } from './pagination';
 
 defineOptions({
-  name:'SkyPagination'
+  name:'ThPagination'
 })
-defineProps<PaginationProps>()
+defineProps()
 
 const ns = useName('pagination')
 const cls = computed(() => [

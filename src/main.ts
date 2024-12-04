@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 import './style.css'
-import ElementPlus from 'element-plus'
+// import ElementPlus from 'element-plus'
 import DBelement from "@/components/index"
+
 // import 'element-plus/dist/index.css'
 import Main from '@/main.vue'
 console.log(import.meta.env)
