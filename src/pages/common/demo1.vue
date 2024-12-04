@@ -116,7 +116,5 @@ const onEditProp=()=>{
 </script>
 
 <style lang='scss' scoped>
-.demo1{
-  background: white;
-}
+
 </style>
