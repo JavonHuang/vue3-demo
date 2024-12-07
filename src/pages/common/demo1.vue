@@ -1,13 +1,17 @@
 <template>
   <th-card>
-    <th-query :columns="columns" :inline="true"></th-query>
-    <!-- <th-button v-on:click="onclas">整个重新赋值</th-button>
-    <th-button v-on:click="onEditProp">单个属性修改</th-button> -->
+    <th-query :columns="columns" :inline="true">
+      <template #num2="{data,formData}">
+        <div>{{data.label}}
+          <th-input v-model="formData[data.prop]"></th-input>
+        </div>
+      </template>
+    </th-query>
   </th-card>
 </template>
 
 <script setup lang='ts'>
-import { QueryColumnsProps } from '@/components';
+import { QueryColumnsProps } from 'th-ui-plus/src/query/query';
 import { ref } from 'vue';
 
 const columns=ref<Array<QueryColumnsProps>>([
@@ -16,6 +20,15 @@ const columns=ref<Array<QueryColumnsProps>>([
     label:"数量",
     prop:'num',
     value:'2021-10-29',
+    props:{
+    }
+  },
+  {
+    type:'ThInput',
+    label:"插槽",
+    prop:'num2',
+    slot:true,
+    value:'676776',
     props:{
     }
   },
@@ -100,18 +113,6 @@ const onclas=()=>{
 
 const onEditProp=()=>{
   columns.value[0].label="测试变更"
-  columns.value[1].props.options=[{
-        value:"676776",
-        label:"那么"
-      },
-      {
-        value:"676776323",
-        label:"那么2"
-      },{
-        value:"67677632223",
-        label:"那么3"
-      }]
-
 }
 </script>
 

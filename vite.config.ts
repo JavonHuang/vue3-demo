@@ -10,10 +10,6 @@ export default ({ command,mode }:{command:string,mode:string}) => {
   if(command=="serve"){
   return defineConfig(mergeConfig(baseConfig(env),devConfig))
   }else{
-    if(mode!='lib'){
-      return defineConfig(mergeConfig(baseConfig(env),prodConfig(env)))
-    }else{
-      return defineConfig(mergeConfig(baseConfig(env),prodConfig(env)))
-    }
+    return defineConfig(mergeConfig(baseConfig(env),prodConfig(env)))
   }
 }

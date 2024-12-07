@@ -25,17 +25,54 @@ export const useGlobalStore = defineStore('global', () => {
         })
         resolve(false)
       } else {
-        request.menu().then((e) => {
-          menuList.value = e.data
-          e.data.forEach((item: any) => {
-            return router.addRoute('portal', {
-              path: item.url,
-              name: item.name,
-              component: () => import(item.path)
-            });
+        menuList.value = [
+          {
+            "url": "/home_use",
+            "path": "/src/pages/common/home.vue",
+            "name": "home"
+          },
+          {
+            "url": "/demo1_use",
+            "path": "/src/pages/common/demo1.vue",
+            "name": "demo1"
+          },
+          {
+            "url": "/demo2_use",
+            "path": "/src/pages/common/demo2.vue",
+            "name": "demo2"
+          },
+          {
+            "url": "/report1_use",
+            "path": "/src/pages/report/reportDemo1.vue",
+            "name": "report1"
+          },
+          {
+            "url": "/report2_use",
+            "path": "/src/pages/report/reportDemo2.vue",
+            "name": "report2"
+          }
+        ]
+        menuList.value.forEach((item: any) => {
+          router.addRoute('portal', {
+            path: item.url,
+            name: item.name,
+            component: () => import(item.path)
           });
-          resolve(true)
         });
+        setTimeout(() => {
+          resolve(true)
+        }, 500)
+        // request.menu().then((e) => {
+        //   menuList.value = e.data
+        //   e.data.forEach((item: any) => {
+        //     return router.addRoute('portal', {
+        //       path: item.url,
+        //       name: item.name,
+        //       component: () => import(item.path)
+        //     });
+        //   });
+        //   resolve(true)
+        // });
       }
     })
   }

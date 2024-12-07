@@ -1,0 +1,25 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+
+@include base(query) {
+  $root:&;
+  display: flex;
+  flex-direction: column;
+  @include m(line){
+    flex-direction: row;
+    @include child($root,sure){
+      justify-content: end;
+    }
+  }
+  @include m(sure) {
+    flex: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 18px;
+  }
+  @include m(icon) {
+    margin: 4px;
+  }
+}

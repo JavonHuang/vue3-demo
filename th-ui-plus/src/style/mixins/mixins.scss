@@ -1,0 +1,51 @@
+@use 'config' as *;
+@use 'sass:string';
+@use 'sass:map';
+@use '../common/var' as *;
+
+$B: null;
+
+@mixin base($block) {
+  $B: $namespace + $common-separator + $block !global;
+  @if(&==null){
+    .#{$B} {
+      @content;
+    }
+  }@else{
+    &.#{$B} {
+      @content;
+    }
+  }
+}
+
+@mixin m($modifier) {
+  $B: $namespace + $common-separator;
+  @if(&==null){
+    #{$modifier} {
+      @content;
+    }
+  }@else{
+    &-#{$modifier} {
+      @content;
+    }
+  }
+}
+
+@mixin is($modifier) {
+  $B: $namespace + $common-separator;
+  @if(&==null){
+    .#{$B}is-#{$modifier} {
+      @content;
+    }
+  }@else{
+    &.#{$B}is-#{$modifier} {
+      @content;
+    }
+  }
+}
+
+@mixin child($root,$c) {
+  #{$root}-#{$c}{
+    @content;
+  }
+}

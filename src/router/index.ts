@@ -31,7 +31,7 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from,next) => {
+router.beforeEach((to, _from,next) => {
   const routeExists = router.getRoutes().some(route => route.name === to.name);
   if (routeExists) {
     next(); // 如果路由存在，继续正常的导航

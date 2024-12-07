@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path';
 import { defineConfig } from 'vite';
 
-const baseConfig=(env:Record<string, string>)=>{ 
+const baseConfig=(_env:Record<string, string>)=>{ 
   return defineConfig({
     base: './',
     // 通用基础配置项
