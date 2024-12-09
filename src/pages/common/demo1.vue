@@ -2,17 +2,38 @@
   <th-card>
     <th-query :columns="columns" :inline="true">
       <template #num2="{data,formData}">
-        <div>{{data.label}}
-          <th-input v-model="formData[data.prop]"></th-input>
-        </div>
+        <th-input v-model="formData[data.prop]"></th-input>
       </template>
     </th-query>
+  </th-card>
+  <th-card>
+    <th-query-table :api="API.table" :columns="tableColumns">
+      <template #name="scope">{{ scope.row.age }}</template>
+      <template #age="scope">{{ scope.row.name }}/{{ scope.row.age }}</template>
+    </th-query-table>
   </th-card>
 </template>
 
 <script setup lang='ts'>
 import { QueryColumnsProps } from 'th-ui-plus/src/query/query';
 import { ref } from 'vue';
+import API from "@/api/commonApi"
+import { IQueryColumn } from 'th-ui-plus/src/queryTable/queryTable';
+const tableColumns=ref<Array<IQueryColumn>>([
+  {
+    columnType:'date',
+    prop:'name',
+    label:'名字',
+    width:80,
+    isSlot:true,
+  },
+  {
+    columnType:'date',
+    prop:'age',
+    label:'年龄',
+    isSlot:true,
+  },
+])
 
 const columns=ref<Array<QueryColumnsProps>>([
   {
@@ -35,7 +56,7 @@ const columns=ref<Array<QueryColumnsProps>>([
   {
     type:'ThSelect',
     label:"数量",
-    prop:'num2',
+    prop:'num3',
     value:'676776',
     props:{
       options:[{

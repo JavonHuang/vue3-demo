@@ -49,3 +49,10 @@ $B: null;
     @content;
   }
 }
+
+@mixin child-level($c) {
+  $B: $namespace + $common-separator;
+  .#{$B}#{$c}{
+    @content;
+  }
+}

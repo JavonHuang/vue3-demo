@@ -9,6 +9,9 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      overflow: hidden;
+      height: 50px;
+      transition: height 0.5s ease-in-out; /* 0.5秒过渡时间，缓动效果 */
     }
   }
 }
@@ -16,10 +19,10 @@
 .el-form-item{
   @include base(form-item) {
     @include m(inline) {
-      margin-right: 12px!important;
-      flex: 1;
+      padding-right: 12px!important;
+      margin-right: 0!important;
       .el-form-item__content{
-        min-width: var(--el-form-inline-content-width);
+        min-width: 0;
       }
     }
     .el-date-editor{

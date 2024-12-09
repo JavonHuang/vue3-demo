@@ -35,6 +35,7 @@ import {ThPopconfirmProps} from './src/popconfirm/popconfirm'
 import {ThPopoverProps} from './src/popover/popover'
 import {ThProgressProps} from './src/progress/progress'
 import {ThQueryProps} from './src/query/query'
+import {ThQueryTableProps} from './src/queryTable/queryTable'
 import {ThRadioProps} from './src/radio/radio'
 import {ThRateProps} from './src/rate/rate'
 import {ThResultProps} from './src/result/result'
@@ -101,6 +102,7 @@ declare module 'vue' {
     ThPopover:ThPopoverProps,
     ThProgress:ThProgressProps,
     ThQuery:ThQueryProps,
+    ThQueryTable:ThQueryTableProps,
     ThRadio:ThRadioProps,
     ThRate:ThRateProps,
     ThResult:ThResultProps,

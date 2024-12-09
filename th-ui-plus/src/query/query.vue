@@ -1,11 +1,12 @@
 <template>
   <div :class="cls">
-    <th-form ref="ruleFormRef" :model="ruleForm" :label-width="props.labelWidth" :inline="props.inline">
-      <th-form-item v-for="item in columnsShow" :inline="props.inline" :key="item.prop" :label="item.label"
+    <th-form ref="ruleFormRef" :style="{height:isExpandHeight+'px'}" :model="ruleForm" :label-width="props.labelWidth" :inline="props.inline">
+      <th-form-item v-for="item in columns" :class="clsFormItem" :inline="props.inline" :key="item.prop" :label="item.label"
         :prop="item.prop">
         <slot :name="item.prop" :data="item" :formData="ruleForm" v-if="item.slot"></slot>
         <component :is="item.type" v-bind="item.props" v-model="ruleForm[item.prop]" v-else></component>
       </th-form-item>
+      <th-form-item v-for="index in extraColumns" :key="index"></th-form-item>
     </th-form>
     <div :class="clsSubmit">
       <th-button :type="'primary'">
@@ -14,20 +15,25 @@
         </th-icon>
         查询
       </th-button>
-      <th-button>
+      <th-button :type="'warning'">
         <th-icon :class="clsSubmitIcon">
           <Refresh></Refresh>
         </th-icon>
         重置
+      </th-button>
+      <th-button :type="'success'" v-on:click="showMore">
+        <th-icon :class="clsSubmitIcon">
+          <Search></Search>
+        </th-icon>
+        更多
       </th-button>
     </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { defineOptions, computed, watch, ref, reactive, onMounted } from 'vue'
+import { defineOptions, computed, watch, ref, reactive, onMounted,nextTick } from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue'
-
 import { useName } from "../hook/useName"
 import { QueryColumnsProps } from './query';
 import * as _ from 'lodash';
@@ -35,6 +41,7 @@ import { FormInstance } from 'element-plus';
 defineOptions({
   name: 'ThQuery'
 })
+
 const props = defineProps({
   labelWidth: {
     type: Number,
@@ -51,34 +58,46 @@ const props = defineProps({
   columns: Array<QueryColumnsProps>
 })
 
+//样式处理
 const ns = useName('query')
 const cls = computed(() => [
   ns.base(),
   ns.m(props.inline ? 'line' : ''),
 ])
 
+const isExpandHeight = computed(() => {
+  if (isExpand.value) {
+    return Math.ceil(props.columns!.length/props.showCount)*50
+  }else{
+    return 50
+  }
+}
+)
+
+const clsFormItem = computed(() => [
+  ns.is(props.inline ?`flex-${Math.floor(24/props.showCount)}`:''),
+])
 const clsSubmit = computed(() => [
   ns.m('sure'),
 ])
-
 const clsSubmitIcon = computed(() => [
   ns.m('icon'),
 ])
 console.log('clsSubmit', clsSubmit)
-
+//事件处理
 const emits = defineEmits(["update:modelValue"])
 
-const columns = ref<Array<QueryColumnsProps>>(_.cloneDeep(props.columns ?? []));
-const columnsShow = computed(() => {
-  return columns.value.splice(0, props.showCount)
-})
+//变量声明
+const columns = ref<Array<QueryColumnsProps>>([]);
+const extraColumns = ref<number>(0)
+const isExpand = ref<boolean>(false)
 const ruleForm = reactive<any>({})
 const ruleFormRef = ref<FormInstance>()
 
 onMounted(() => {
-  _.map(columnsShow.value, (e) => {
-    ruleForm[e.prop] = e.value
-  });
+  nextTick(()=>{
+    init()
+  })
 })
 
 const submitForm = async (formEl: FormInstance | undefined) => {
@@ -97,21 +116,35 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields()
 }
 
+const showMore=()=>{
+  isExpand.value=!isExpand.value
+}
 
+// 初始化数据
+const init = () => {
+  const extra = props.columns!.length % props.showCount;
+  if (extra !== 0) {
+    extraColumns.value = props.showCount - extra
+  }
+  _.map(columns.value, (e) => {
+    ruleForm[e.prop] = e.value
+  });
+  columns.value = _.cloneDeep(props.columns ?? [])
+}
 
 // 监听变化
 watch(() => props.columns, (newVal, oldVal) => {
   if (!_.isEqual(newVal, oldVal)) {
-    columns.value = _.cloneDeep(newVal ?? [])
+    init()
   }
 });
 
 watch(() => columns.value, (newVal) => {
-  const formValue: any = {}
-  _.map(newVal, (e) => {
-    formValue[e.prop] = e.value
-  });
-  emits("update:modelValue", formValue)
+  // const formValue: any = {}
+  // _.map(newVal, (e) => {
+  //   formValue[e.prop] = e.value
+  // });
+  // emits("update:modelValue", formValue)
 }, { deep: true })
 
 defineExpose({ submitForm, resetForm })

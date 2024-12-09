@@ -1,0 +1,12 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+
+@for $i from 1 through 24 {
+  @include is('flex-#{$i}') {
+    width: #{percentage((1 / 24)*$i)};
+  }
+}
+div{
+  box-sizing: border-box;
+}

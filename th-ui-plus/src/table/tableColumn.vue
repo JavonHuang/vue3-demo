@@ -3,7 +3,9 @@
     v-bind="$attrs"
     :class="cls"
   >
-    <slot></slot>
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name v-bind="slotData || {}"></slot>
+    </template>
   </el-table-column>
 </template>
 
@@ -21,6 +23,7 @@ const ns = useName('table-column')
 const cls = computed(() => [
   ns.base(),
 ])
+
 </script>
 
 <style lang='scss' scoped>

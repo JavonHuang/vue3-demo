@@ -39,6 +39,7 @@ import ThPopconfirm from './src/popconfirm/popconfirm.ts'
 import ThPopover from './src/popover/popover.ts'
 import ThProgress from './src/progress/progress.ts'
 import ThQuery from './src/query/query.ts'
+import ThQueryTable from './src/queryTable/queryTable.ts'
 import ThRadio from './src/radio/radio.ts'
 import ThRate from './src/rate/rate.ts'
 import ThResult from './src/result/result.ts'
@@ -109,6 +110,7 @@ const components: {
   ThPopover,
   ThProgress,
   ThQuery,
+  ThQueryTable,
   ThRadio,
   ThRate,
   ThResult,
@@ -170,3 +172,6 @@ export default {
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install
 }
+
+export type {QueryColumnsProps} from "./src/query/query.ts"
+export type {QueryTableColumnProps} from './src/queryTable/queryTable.ts'

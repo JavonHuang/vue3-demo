@@ -23,5 +23,4 @@ const cls = computed(() => [
   ns.base(),
   props.class,
 ])
-console.log(cls)
 </script>
