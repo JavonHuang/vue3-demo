@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang='ts'>
-import {defineOptions,computed,useSlots } from 'vue'
+import {defineOptions,computed } from 'vue'
 import {useName} from "../hook/useName"
 import { ElTable } from 'element-plus'
 defineOptions({

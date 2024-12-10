@@ -18,7 +18,7 @@ export default {
   table(_data={}) {
     return new Promise((resolve, _reject)=>{
       resolve(Mock.mock({
-        "data|1-10": [
+        "data|1-2": [
           {
             name:Mock.mock('@name'),
             age:Mock.mock('@integer(20, 40)'),

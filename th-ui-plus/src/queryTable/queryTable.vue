@@ -1,6 +1,6 @@
 <template>
   <div :class="cls">
-    <th-table :data="tableData">
+    <th-table :data="tableData" :border="props.border">
       <th-table-column v-bind="item" v-for="item in props.columns">
         <template #default="scope" v-if="item.isSlot">
           <slot :name="item.prop" v-bind="scope || {}"></slot>
@@ -24,6 +24,10 @@ const props = defineProps({
     default: () => Promise.resolve(), // 提供一个默认的实现，它返回一个已解决的 Promise
   },
   columns: Array<IQueryColumn>,
+  border:{
+    type:Boolean,
+    default:false,
+  }
 })
 //样式处理
 const ns = useName('query-table')

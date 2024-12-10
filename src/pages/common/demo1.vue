@@ -7,10 +7,11 @@
     </th-query>
   </th-card>
   <th-card>
-    <th-query-table :api="API.table" :columns="tableColumns">
+    <th-query-table :border="true" :api="API.table" :columns="tableColumns">
       <template #name="scope">{{ scope.row.age }}</template>
       <template #age="scope">{{ scope.row.name }}/{{ scope.row.age }}</template>
     </th-query-table>
+    {{te}} {{te1}}  {{te2}}
   </th-card>
 </template>
 
@@ -19,6 +20,11 @@ import { QueryColumnsProps } from 'th-ui-plus/src/query/query';
 import { ref } from 'vue';
 import API from "@/api/commonApi"
 import { IQueryColumn } from 'th-ui-plus/src/queryTable/queryTable';
+import moment from 'moment';
+
+const te=moment().format('x')
+const te1=moment('2024-12-10 00:00:00').format('x')
+const te2=moment().endOf('day').valueOf()
 const tableColumns=ref<Array<IQueryColumn>>([
   {
     columnType:'date',
