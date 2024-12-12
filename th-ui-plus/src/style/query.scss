@@ -6,6 +6,8 @@
   $root:&;
   display: flex;
   flex-direction: column;
+  margin-bottom:10px;
+  border-bottom: 1px solid #DCDFE6;
   @include m(line){
     @include child-level(form){
       width: calc(100% - 100px);

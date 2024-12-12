@@ -18,10 +18,11 @@ export default {
   table(_data={}) {
     return new Promise((resolve, _reject)=>{
       resolve(Mock.mock({
-        "data|1-2": [
+        "data|1-20": [
           {
+            id:()=>Mock.mock('@integer(1, 40)'),
             name:Mock.mock('@name'),
-            age:Mock.mock('@integer(20, 40)'),
+            age:()=>Mock.mock('@integer(1, 40)'),
           }
         ]
       }))

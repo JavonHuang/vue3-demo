@@ -30,6 +30,7 @@ import {ThMentionProps} from './src/mention/mention'
 import {ThMenuProps} from './src/menu/menu'
 import {ThInputNumberProps} from './src/number/number'
 import {ThPageHeaderProps} from './src/pageHeader/pageHeader'
+import {ThPageLayoutProps} from './src/pageLayout/pageLayout'
 import {ThPaginationProps} from './src/pagination/pagination'
 import {ThPopconfirmProps} from './src/popconfirm/popconfirm'
 import {ThPopoverProps} from './src/popover/popover'
@@ -97,6 +98,7 @@ declare module 'vue' {
     ThMenu:ThMenuProps,
     ThInputNumber:ThInputNumberProps,
     ThPageHeader:ThPageHeaderProps,
+    ThPageLayout:ThPageLayoutProps,
     ThPagination:ThPaginationProps,
     ThPopconfirm:ThPopconfirmProps,
     ThPopover:ThPopoverProps,

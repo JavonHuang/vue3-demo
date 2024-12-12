@@ -1,0 +1,17 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+
+@include base(page-layout) {
+  display: flex;
+  border-radius: 4px;
+  background-color: white;
+  height: 100%;
+  flex-direction: column;
+  padding: 16px 12px;
+  @include m(row){
+    &>:nth-child(2) {
+      flex-grow: 1;
+    }
+  }
+}

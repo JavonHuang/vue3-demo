@@ -1,18 +1,15 @@
 <template>
-  <th-card>
-    <th-query :columns="columns" :inline="true">
+  <th-page-layout>
+    <th-query :columns="columns" :inline="true" :selectable="true">
       <template #num2="{data,formData}">
         <th-input v-model="formData[data.prop]"></th-input>
       </template>
     </th-query>
-  </th-card>
-  <th-card>
     <th-query-table :border="true" :api="API.table" :columns="tableColumns">
       <template #name="scope">{{ scope.row.age }}</template>
       <template #age="scope">{{ scope.row.name }}/{{ scope.row.age }}</template>
     </th-query-table>
-    {{te}} {{te1}}  {{te2}}
-  </th-card>
+  </th-page-layout>
 </template>
 
 <script setup lang='ts'>
@@ -38,6 +35,24 @@ const tableColumns=ref<Array<IQueryColumn>>([
     prop:'age',
     label:'年龄',
     isSlot:true,
+    width:1000,
+  },
+  {
+    columnType:'date',
+    prop:'age',
+    label:'年龄',
+    width:1000,
+  },
+  {
+    columnType:'date',
+    prop:'age',
+    label:'年龄',
+  },
+  {
+    columnType:'date',
+    prop:'age',
+    label:'年龄',
+    fixed:"right"
   },
 ])
 

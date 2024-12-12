@@ -1,6 +1,5 @@
 import type { Component, App } from "vue"
 import './src/index.scss'
-
 import ThAffix from './src/affix/affix.ts'
 import ThAlert from './src/alert/alert.ts'
 import ThAnchor from './src/anchor/anchor.ts'
@@ -34,6 +33,7 @@ import ThMenu from './src/menu/menu.ts'
 import ThMenuItem from './src/menu/menuItem.ts'
 import ThInputNumber  from './src/number/number.ts'
 import ThPageHeader from './src/pageHeader/pageHeader.ts'
+import ThPageLayout from './src/pageLayout/pageLayout.ts'
 import ThPagination from './src/pagination/pagination.ts'
 import ThPopconfirm from './src/popconfirm/popconfirm.ts'
 import ThPopover from './src/popover/popover.ts'
@@ -105,6 +105,7 @@ const components: {
   ThMenuItem,
   ThInputNumber,
   ThPageHeader,
+  ThPageLayout,
   ThPagination,
   ThPopconfirm,
   ThPopover,
@@ -174,4 +175,4 @@ export default {
 }
 
 export type {QueryColumnsProps} from "./src/query/query.ts"
-export type {QueryTableColumnProps} from './src/queryTable/queryTable.ts'
+export type {IQueryColumn} from './src/queryTable/queryTable.ts'

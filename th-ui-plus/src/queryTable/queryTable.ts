@@ -9,6 +9,7 @@ export type IQueryColumn={
   prop:string,
   label:string,
   width?:number,
+  fixed?:string,
 }
 
 export type ThQueryTableProps =  typeof ThQueryTable 

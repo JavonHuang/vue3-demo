@@ -73,17 +73,7 @@ const goPage = (e: any) => {
       padding: 12px 20px;
       overflow: auto;
       display: flex;
-    flex-direction: column;
-     &>div{
-        border-radius: 4px;
-        background-color: white;
-      }
-      &>:nth-child(2){
-        background-color: white;
-        flex-grow: 1;
-        margin-top: 10px;
-        box-sizing: content-box;
-      }
+      flex-direction: column;
     }
   }
 }

@@ -1,0 +1,11 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+
+@include base(table) {
+  .el-table__header-wrapper{
+    th.el-table__cell{
+      background: var(--el-color-primary-light-9)!important;
+    }
+  }
+}
