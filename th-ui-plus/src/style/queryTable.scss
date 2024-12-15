@@ -1,0 +1,17 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+
+ @include base(query-table) {
+  @include m(pagination){
+    margin: 10px 0 0 auto;
+    // margin-right: 0;
+  }
+  
+  @include m(number-column){
+    font-weight: bold;
+  }
+  @include m(thousands-column){
+    font-weight: bold;
+  }
+}

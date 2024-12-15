@@ -1,77 +1,131 @@
 <template>
-  <th-table height="100%"  :class="cls" :data="tableData" :border="props.border" @selection-change="handleSelectionChange">
-    <th-table-column v-if="props.selectable" type="selection" :selectable="selectable"  width="55" />
-    <th-table-column v-bind="item" v-for="item in props.columns">
+  <th-table height="100%" :class="cls" :data="tableData" :border="props.border"
+    @selection-change="handleSelectionChange">
+    <th-table-column v-if="props.selectable" type="selection" :selectable="selectable" width="55"></th-table-column>
+    <th-table-column :formatter="getColumnFormatter(item)" v-bind="item" :min-width="item.minWidth??80" :width="getColumnWidth(item)"
+      v-for="item in props.columns">
       <template #default="scope" v-if="item.isSlot">
         <slot :name="item.prop" v-bind="scope || {}"></slot>
       </template>
     </th-table-column>
   </th-table>
-  <div>
-  <th-pagination
-    v-model:current-page="currentPage4"
-    v-model:page-size="pageSize4"
-    :page-sizes="[100, 200, 300, 400]"
-    :size="size"
-    :disabled="disabled"
-    :background="background"
-    layout="total, sizes, prev, pager, next, jumper"
-    :total="400"
-    @size-change="handleSizeChange"
-    @current-change="handleCurrentChange"
-  >
-  </th-pagination>
-</div>
+  <div :class="clsPagination">
+    <th-pagination size="small" v-model:current-page="currentPage" v-model:page-size="pageSize"
+      :page-sizes="[100, 200, 300, 400]" layout="total, sizes, prev, pager, next, jumper" :total="total"
+      @size-change="handleSizeChange" @current-change="handleCurrentChange">
+    </th-pagination>
+  </div>
 </template>
 
 <script setup lang='ts'>
-import { ref,computed, onMounted, nextTick,useSlots } from 'vue'
+import { ref, computed, onMounted, nextTick,h } from 'vue'
 import { useName } from "../hook/useName"
-import { IQueryColumn } from './queryTable';
-import { ComponentSize, TableInstance } from 'element-plus';
+import { IQueryColumn, IQueryTable } from './queryTable'
+import { TableInstance } from 'element-plus'
+import NumberColumn from './component/numberColumn.vue'
+import ThousandsColumn from './component/thousandsColumn.vue'
+
+import moment from 'moment';
+
 defineOptions({
   name: 'ThQueryTable'
 })
-type ApiFunctionType = (_data:any) => Promise<any>;
-const props = defineProps({
-  api: {
-    type: Function as unknown as () => ApiFunctionType, // 使用类型断言来指定函数的类型
-    default: () => Promise.resolve(), // 提供一个默认的实现，它返回一个已解决的 Promise
-  },
-  columns: Array<IQueryColumn>,
-  selectable:{
-    type:Boolean,
-    default:true,
-  },
-  border:{
-    type:Boolean,
-    default:false,
-  }
+
+const props = withDefaults(defineProps<IQueryTable>(), {
+  selectable: false,
+  border: false,
 })
+
 //样式处理
 const ns = useName('query-table')
 const cls = computed(() => [
   ns.base(),
 ])
 
-const tableData=ref([])
+const clsPagination = computed(() => [
+  ns.m('pagination'),
+])
+
+const tableData = ref([])
+const currentPage = ref(1)
+const pageSize = ref(100)
+const total = ref(0)
 
 onMounted(() => {
-  nextTick(()=>{
-    init()
+  nextTick(() => {
+    getDataSource()
   })
-  console.log(useSlots())
 })
 
-const init=()=>{
-  props.api({}).then((e)=>{
-    tableData.value=e.data
+const getDataSource = () => {
+  const obj = getParams()
+  props.api(obj).then((e) => {
+    tableData.value = e.data;
+    total.value = e.total;
   })
 }
-const selectable = (row:any) => true
 
+const getParams = (): any => {
+  return {
+    pageSize: pageSize.value,
+    currentPage: currentPage.value,
+  }
+}
+
+const handleSizeChange = () => {
+  getDataSource()
+}
+
+const handleCurrentChange = () => {
+  getDataSource()
+}
+
+const selectable = (row: any) => true
+
+const getColumnFormatter = (queryColumn: IQueryColumn) => {
+  return (row: any, column: any, cellValue: any, index: number) => {
+    switch (queryColumn.columnType) {
+      case 'year':
+        return moment(cellValue).format('yyyy')
+      case 'month':
+        return moment(cellValue).format('MM').replace('0',(match, index, _string)=>{
+          return index === 0 ? '' : match; 
+        })
+      case 'date':
+        return moment(cellValue).format('yyyy-MM-DD')
+      case 'dateTime':
+        return moment(cellValue).format('yyyy-MM-DD HH:mm:ss')
+      case 'time':
+        return moment(cellValue).format('HH:mm:ss')
+      case 'number':
+        return h(NumberColumn,{row,column,cellValue,index})
+      case 'thousands':
+        return h(ThousandsColumn,{row,column,cellValue,index})
+      default:
+        return cellValue
+    }
+  }
+}
+
+const getColumnWidth = (queryColumn: IQueryColumn) => {
+  switch (queryColumn.columnType) {
+    case 'year':
+      return 60
+    case 'month':
+      return 40
+    case 'date':
+      return 110
+    case 'dateTime':
+      return 170
+    case 'time':
+      return 90
+    default:
+      return queryColumn.width
+  }
+}
 const multipleTableRef = ref<TableInstance>()
 const multipleSelection = ref<[]>([])
+
 
 const toggleSelection = (rows?: [], ignoreSelectable?: boolean) => {
   if (rows) {
@@ -88,19 +142,6 @@ const toggleSelection = (rows?: [], ignoreSelectable?: boolean) => {
 }
 const handleSelectionChange = (val: []) => {
   multipleSelection.value = val
-}
-
-const currentPage4 = ref(4)
-const pageSize4 = ref(100)
-const size = ref<ComponentSize>('default')
-const background = ref(false)
-const disabled = ref(false)
-
-const handleSizeChange = (val: number) => {
-  console.log(`${val} items per page`)
-}
-const handleCurrentChange = (val: number) => {
-  console.log(`current page: ${val}`)
 }
 </script>
 

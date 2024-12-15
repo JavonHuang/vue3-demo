@@ -3,8 +3,8 @@
 @use 'sass:map';
 
 @include base(table) {
-  .el-table__header-wrapper{
-    th.el-table__cell{
+  .th-table__header-wrapper{
+    th.th-table__cell{
       background: var(--el-color-primary-light-9)!important;
     }
   }

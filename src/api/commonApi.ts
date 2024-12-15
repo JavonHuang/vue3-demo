@@ -17,15 +17,28 @@ export default {
   },
   table(_data={}) {
     return new Promise((resolve, _reject)=>{
-      resolve(Mock.mock({
-        "data|1-20": [
+      let dataList=Mock.mock({
+        "data|10-10": [
           {
             id:()=>Mock.mock('@integer(1, 40)'),
             name:Mock.mock('@name'),
-            age:()=>Mock.mock('@integer(1, 40)'),
+            year:()=>Mock.mock('@datetime()'),
+            month:()=>Mock.mock('@datetime()'),
+            date:()=>Mock.mock('@datetime()'),
+            dateTime:()=>Mock.mock('@datetime()'),
+            time:()=>Mock.mock('@datetime()'),
+            number:()=>Mock.mock('@integer(90, 10000)'),
+            thousands:()=>Mock.mock('@integer(90, 10000)'),
+            age:()=>Mock.mock('@integer(90, 10000)'),
+            bathderay:()=>Mock.mock('@datetime()'),
           }
         ]
-      }))
+      }).data;
+      resolve({
+        code:200,
+        data:dataList,
+        total:200,
+      })
     })
     // return request({
     //   url: '/api/vue/table',

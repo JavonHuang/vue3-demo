@@ -14,6 +14,7 @@ import {ThCheckboxProps} from './src/checkbox/checkbox'
 import {ThColProps} from './src/col/col'
 import {ThCollapseProps} from './src/collapse/collapse'
 import {ThColorPickerProps} from './src/colorPicker/colorPicker'
+import {ThConfigProviderProps} from './src/configProvider/configProvider'
 import {ThDatePickerProps} from './src/datePicker/datePicker'
 import {ThDescriptionsProps} from './src/descriptions/descriptions'
 import {ThDialogProps} from './src/dialog/dialog'
@@ -82,6 +83,7 @@ declare module 'vue' {
     ThCol:ThColProps,
     ThCollapse:ThCollapseProps,
     ThColorPicker:ThColorPickerProps,
+    ThConfigProvider:ThConfigProviderProps,
     ThDatePicker:ThDatePickerProps,
     ThDescriptions:ThDescriptionsProps,
     ThDialog:ThDialogProps,

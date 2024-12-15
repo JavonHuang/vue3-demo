@@ -15,7 +15,8 @@ import ThCarousel from './src/carousel/carousel.ts'
 import ThCheckbox from './src/checkbox/checkbox.ts'
 import ThCol from './src/col/col.ts'
 import ThCollapse from './src/collapse/collapse.ts'
-import ThcolorPicker from './src/colorPicker/colorPicker.ts'
+import ThColorPicker from './src/colorPicker/colorPicker.ts'
+import ThConfigProvider from './src/configProvider/configProvider.ts'
 import ThDatePicker from './src/datePicker/datePicker.ts'
 import ThDescriptions from './src/descriptions/descriptions.ts'
 import ThDialog from './src/dialog/dialog.ts'
@@ -87,7 +88,8 @@ const components: {
   ThCheckbox,
   ThCol,
   ThCollapse,
-  ThcolorPicker,
+  ThColorPicker,
+  ThConfigProvider,
   ThDatePicker,
   ThDescriptions,
   ThDialog,

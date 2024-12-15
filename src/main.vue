@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <th-config-provider>
+    <router-view></router-view>
+  </th-config-provider>
 </template>
 <script setup lang='ts'>
 import { useGlobalStore } from "@/store/useGlobalStore"

@@ -1,13 +1,13 @@
 <template>
   <th-page-layout>
-    <th-query :columns="columns" :inline="true" :selectable="true">
+    <th-query :columns="columns" :inline="true">
       <template #num2="{data,formData}">
         <th-input v-model="formData[data.prop]"></th-input>
       </template>
     </th-query>
-    <th-query-table :border="true" :api="API.table" :columns="tableColumns">
-      <template #name="scope">{{ scope.row.age }}</template>
-      <template #age="scope">{{ scope.row.name }}/{{ scope.row.age }}</template>
+    <th-query-table :border="true" :selectable="true" :api="API.table" :columns="tableColumns">
+      <template #name="scope">我的名字：{{ scope.row.name }}</template>
+      <template #age="scope">我的年龄：{{ scope.row.age }}</template>
     </th-query-table>
   </th-page-layout>
 </template>
@@ -17,41 +17,56 @@ import { QueryColumnsProps } from 'th-ui-plus/src/query/query';
 import { ref } from 'vue';
 import API from "@/api/commonApi"
 import { IQueryColumn } from 'th-ui-plus/src/queryTable/queryTable';
-import moment from 'moment';
 
-const te=moment().format('x')
-const te1=moment('2024-12-10 00:00:00').format('x')
-const te2=moment().endOf('day').valueOf()
 const tableColumns=ref<Array<IQueryColumn>>([
   {
-    columnType:'date',
+    columnType:'text',
     prop:'name',
-    label:'名字',
+    label:'文本',
+    width:180,
+    isSlot:true,
+  },
+  {
+    columnType:'year',
+    prop:'year',
+    label:'年',
+  },
+  {
+    columnType:'month',
+    prop:'month',
+    label:'月',
+  },
+  {
+    columnType:'date',
+    prop:'date',
+    label:'日',
+  },
+  {
+    columnType:'dateTime',
+    prop:'dateTime',
+    label:'时间',
+  },
+  {
+    columnType:'time',
+    prop:'time',
+    label:'时分秒',
+  },
+  {
+    columnType:'number',
+    prop:'number',
+    label:'数量',
     width:80,
-    isSlot:true,
   },
   {
-    columnType:'date',
+    columnType:'thousands',
+    prop:'thousands',
+    label:'千分位',
+  },
+  {
+    columnType:'text',
     prop:'age',
     label:'年龄',
     isSlot:true,
-    width:1000,
-  },
-  {
-    columnType:'date',
-    prop:'age',
-    label:'年龄',
-    width:1000,
-  },
-  {
-    columnType:'date',
-    prop:'age',
-    label:'年龄',
-  },
-  {
-    columnType:'date',
-    prop:'age',
-    label:'年龄',
     fixed:"right"
   },
 ])
