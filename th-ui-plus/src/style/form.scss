@@ -1,32 +1,30 @@
 @use 'common/var' as *;
 @use 'mixins/mixins' as *;
 @use 'sass:map';
+@use 'mixins/config' as *;
 
-.el-form{
-  @include base(form) {
-    width: 100%;
-    @include m(inline) {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      overflow: hidden;
-      height: 50px;
-      transition: height 0.5s ease-in-out; /* 0.5秒过渡时间，缓动效果 */
-    }
+@include base(form) {
+  width: 100%;
+  @include m(inline) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+    height: 50px;
+    transition: height 0.5s ease-in-out; /* 0.5秒过渡时间，缓动效果 */
   }
 }
 
-.el-form-item{
-  @include base(form-item) {
-    @include m(inline) {
-      padding-right: 12px!important;
-      margin-right: 0!important;
-      .el-form-item__content{
-        min-width: 0;
-      }
+@include base(form-item) {
+  @include m(inline) {
+    padding-right: 12px!important;
+    margin-right: 0!important;
+    .#{$orgnamespace}-form-item__content{
+      min-width: 0;
+      width: 100%!important;
     }
-    .el-date-editor{
-      width: 100%;
-    }
+  }
+  .#{$orgnamespace}-date-editor{
+    width: 100%!important;
   }
 }

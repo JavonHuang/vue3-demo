@@ -3,25 +3,25 @@
 @use 'sass:map';
 $buttonType:(primary, success, warning, danger, info);
 $buttonSize:(large,default,small);
-.el-button{
-  @include base(button) {
-    padding: 0;
-    @each $type in $buttonType {
-      $color1:map.get($colors, $type, 'base');
 
-      @include is($type) {
-        background-color: $color1;
-      }
+@include base(button) {
+  padding: 0;
+  @each $type in $buttonType {
+    $color1:map.get($colors, $type, 'base');
+
+    @include is($type) {
+      background-color: $color1;
     }
-    @each $size in $buttonSize {
-      $sizeMap:map.get($thSize, $size);
-      @include is($size) {
-        @each $key, $value in $sizeMap {
-          #{$key}: $value;
-        }      
-      }
+  }
+  @each $size in $buttonSize {
+    $sizeMap:map.get($thSize, $size);
+    @include is($size) {
+      @each $key, $value in $sizeMap {
+        #{$key}: $value;
+      }      
     }
   }
 }
+
 
 
