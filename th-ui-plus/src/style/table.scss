@@ -1,11 +1,24 @@
 @use 'common/var' as *;
 @use 'mixins/mixins' as *;
 @use 'sass:map';
+@use 'mixins/config' as *;
 
 @include base(table) {
-  .th-table__header-wrapper{
-    th.th-table__cell{
+  .#{$orgnamespace}-table__header-wrapper{
+    .#{$orgnamespace}-table__cell{
       background: var(--el-color-primary-light-9)!important;
+    }
+  }
+  .#{$orgnamespace}-table__header{
+    .cell{
+      color: #000;
+      font-weight: bold;
+      padding: 0px 4px;
+    }
+  }
+  .#{$orgnamespace}-table__body{
+    .cell{
+      padding: 0px 4px;
     }
   }
 }

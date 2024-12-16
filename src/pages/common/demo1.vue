@@ -5,7 +5,7 @@
         <th-input v-model="formData[data.prop]"></th-input>
       </template>
     </th-query>
-    <th-query-table :border="true" :selectable="true" :api="API.table" :columns="tableColumns">
+    <th-query-table :selectable="true" :api="API.table" :columns="tableColumns">
       <template #name="scope">我的名字：{{ scope.row.name }}</template>
       <template #age="scope">我的年龄：{{ scope.row.age }}</template>
     </th-query-table>
@@ -105,12 +105,9 @@ const columns=ref<Array<QueryColumnsProps>>([
     type:'ThDatePicker',
     label:"出生日期",
     prop:'age',
-    value:null,
+    value:new Date().getTime(),
     props:{
-    value:'2021-10-29',
-    placeholder:"Pick a day",
-    format:"YYYY/MM/DD",
-    valueFormat:"YYYY-MM-DD",
+      format:"YYYY-MM-DD",
     }
   },
   {
@@ -119,10 +116,10 @@ const columns=ref<Array<QueryColumnsProps>>([
     prop:'age1',
     value:null,
     props:{
-    value:'2021-10-29',
-    placeholder:"Pick a day",
-    format:"YYYY/MM/DD",
-    valueFormat:"YYYY-MM-DD",
+      value:'2021-10-29',
+      placeholder:"Pick a day",
+      format:"YYYY/MM/DD",
+      valueFormat:"YYYY-MM-DD",
     }
   },
   {
@@ -131,10 +128,10 @@ const columns=ref<Array<QueryColumnsProps>>([
     prop:'age2',
     value:null,
     props:{
-    value:'2021-10-29',
-    placeholder:"Pick a day",
-    format:"YYYY/MM/DD",
-    valueFormat:"YYYY-MM-DD",
+      value:'2021-10-29',
+      placeholder:"Pick a day",
+      format:"YYYY/MM/DD",
+      valueFormat:"YYYY-MM-DD",
     }
   }
 ])

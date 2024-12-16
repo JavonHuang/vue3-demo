@@ -1,38 +1,36 @@
 <template>
-  <el-form
-    v-bind="props"
-    :class="cls"
-    ref="tform"
-  >
+  <el-form v-bind="props" :class="cls" ref="ruleFormRef">
     <slot></slot>
   </el-form>
 </template>
 
 <script setup lang='ts'>
-import {defineOptions,computed, ref } from 'vue'
-import {useName} from "../hook/useName"
-import { ElForm } from 'element-plus'
+import { defineOptions, computed, ref } from 'vue'
+import { useName } from "../hook/useName"
+import { ElForm, FormInstance } from 'element-plus'
 
 import type { FormProps } from 'element-plus';
 
-type IProps={
+type IProps = {
   [key: string]: any;
 } & FormProps
 
 defineOptions({
-  name:'ThForm'
+  name: 'ThForm'
 })
-const props=defineProps<IProps>()
-const tform: any = ref<HTMLElement | null>(null)
+const props = defineProps<IProps>()
+const ruleFormRef = ref<FormInstance>()
 
 const ns = useName('form')
 const cls = computed(() => [
   ns.base(),
-  ns.m(props.inline ?'inline':''),
+  ns.m(props.inline ? 'inline' : ''),
 ])
-defineExpose(tform);
+
+defineExpose({
+  getRef:()=>ruleFormRef.value
+});
+
 </script>
 
-<style lang='scss' scoped>
-
-</style>
+<style lang='scss' scoped></style>

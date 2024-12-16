@@ -1,5 +1,5 @@
 <template>
-  <th-table height="100%" :class="cls" :data="tableData" :border="props.border"
+  <th-table height="100%" :class="cls" :data="tableData" :border="props.border" ref="tableRef"
     @selection-change="handleSelectionChange">
     <th-table-column v-if="props.selectable" type="selection" :selectable="selectable" width="55"></th-table-column>
     <th-table-column :formatter="getColumnFormatter(item)" v-bind="item" :min-width="item.minWidth??80" :width="getColumnWidth(item)"
@@ -24,8 +24,8 @@ import { IQueryColumn, IQueryTable } from './queryTable'
 import { TableInstance } from 'element-plus'
 import NumberColumn from './component/numberColumn.vue'
 import ThousandsColumn from './component/thousandsColumn.vue'
-
 import moment from 'moment';
+import { ThRef } from '../global'
 
 defineOptions({
   name: 'ThQueryTable'
@@ -45,7 +45,7 @@ const cls = computed(() => [
 const clsPagination = computed(() => [
   ns.m('pagination'),
 ])
-
+const tableRef=ref<ThRef<TableInstance>>()
 const tableData = ref([])
 const currentPage = ref(1)
 const pageSize = ref(100)
@@ -112,7 +112,7 @@ const getColumnWidth = (queryColumn: IQueryColumn) => {
     case 'year':
       return 60
     case 'month':
-      return 40
+      return 50
     case 'date':
       return 110
     case 'dateTime':
@@ -142,6 +142,7 @@ const toggleSelection = (rows?: [], ignoreSelectable?: boolean) => {
 }
 const handleSelectionChange = (val: []) => {
   multipleSelection.value = val
+  console.log(tableRef.value?.getRef())
 }
 </script>
 

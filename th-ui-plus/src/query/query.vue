@@ -6,7 +6,6 @@
         <slot :name="item.prop" :data="item" :formData="ruleForm" v-if="item.slot"></slot>
         <component :is="item.type" v-bind="item.props" v-model="ruleForm[item.prop]" v-else></component>
       </th-form-item>
-      <th-form-item v-for="index in extraColumns" :key="index"></th-form-item>
     </th-form>
     <div :class="clsSubmit">
       <th-button :type="'primary'">
@@ -15,7 +14,7 @@
         </th-icon>
         查询
       </th-button>
-      <th-button :type="'warning'">
+      <th-button :type="'warning'" v-on:click="resetForm">
         <th-icon :class="clsSubmitIcon">
           <Refresh></Refresh>
         </th-icon>
@@ -38,6 +37,7 @@ import { useName } from "../hook/useName"
 import { QueryColumnsProps } from './query';
 import * as _ from 'lodash';
 import { FormInstance } from 'element-plus';
+import { ThRef } from '../global';
 defineOptions({
   name: 'ThQuery'
 })
@@ -89,10 +89,9 @@ const emits = defineEmits(["update:modelValue"])
 
 //变量声明
 const columns = ref<Array<QueryColumnsProps>>([]);
-const extraColumns = ref<number>(0)
 const isExpand = ref<boolean>(false)
 const ruleForm = reactive<any>({})
-const ruleFormRef = ref<FormInstance>()
+const ruleFormRef = ref<ThRef<FormInstance>>()
 
 onMounted(() => {
   nextTick(()=>{
@@ -111,9 +110,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   })
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
+const resetForm = () => {
+  console.log(ruleFormRef.value)
+  if (!ruleFormRef.value) return
+  ruleFormRef.value.getRef().resetFields()
 }
 
 const showMore=()=>{
@@ -122,14 +122,10 @@ const showMore=()=>{
 
 // 初始化数据
 const init = () => {
-  const extra = props.columns!.length % props.showCount;
-  if (extra !== 0) {
-    extraColumns.value = props.showCount - extra
-  }
+  columns.value = _.cloneDeep(props.columns ?? [])
   _.map(columns.value, (e) => {
     ruleForm[e.prop] = e.value
   });
-  columns.value = _.cloneDeep(props.columns ?? [])
 }
 
 // 监听变化

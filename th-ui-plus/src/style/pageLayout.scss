@@ -11,7 +11,7 @@
   padding: 16px 12px;
   @include m(row){
     &>:nth-child(2) {
-      flex-grow: 1;
+      flex: 1;
     }
   }
 }

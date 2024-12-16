@@ -3,7 +3,6 @@
     v-bind="$attrs"
     :class="cls"
   >
-
   </el-date-picker>
 </template>
 
