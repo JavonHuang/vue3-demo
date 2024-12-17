@@ -1,5 +1,7 @@
 <template>
-  <el-date-picker
+  <el-date-picker 
+    format="YYYY-MM-DD"
+    value-format='x'
     v-bind="$attrs"
     :class="cls"
   >

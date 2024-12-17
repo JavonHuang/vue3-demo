@@ -25,6 +25,7 @@ import ThDropdown from './src/dropdown/dropdown.ts'
 import ThDropdownItem from './src/dropdown/dropdownItem.ts'
 import ThEmpty from './src/empty/empty.ts'
 import ThForm from './src/form/form.ts'
+import ThFormAuto from './src/formAuto/formAuto.ts'
 import ThFormItem from './src/form/formItem.ts'
 import ThIcon from './src/icon/icon.ts'
 import ThImage from './src/image/image.ts'
@@ -98,6 +99,7 @@ const components: {
   ThDropdownItem,
   ThEmpty,
   ThForm,
+  ThFormAuto,
   ThFormItem,
   ThIcon,
   ThImage,
@@ -177,4 +179,5 @@ export default {
 }
 
 export type {QueryColumnsProps} from "./src/query/query.ts"
-export type {IQueryColumn} from './src/queryTable/queryTable.ts'
+export type {IQueryColumn,QueryTableInstance} from './src/queryTable/queryTable.ts'
+export type {FormAutoColumnsProps} from './src/formAuto/formAuto.ts'

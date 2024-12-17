@@ -1,0 +1,11 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'sass:map';
+@use 'mixins/config' as *;
+
+@include base(form-auto) {
+  @include child-level(form){
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

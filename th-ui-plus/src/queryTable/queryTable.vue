@@ -20,7 +20,7 @@
 <script setup lang='ts'>
 import { ref, computed, onMounted, nextTick,h } from 'vue'
 import { useName } from "../hook/useName"
-import { IQueryColumn, IQueryTable } from './queryTable'
+import { IQueryColumn, IQueryTable, QueryTableInstance } from './queryTable'
 import { TableInstance } from 'element-plus'
 import NumberColumn from './component/numberColumn.vue'
 import ThousandsColumn from './component/thousandsColumn.vue'
@@ -123,9 +123,10 @@ const getColumnWidth = (queryColumn: IQueryColumn) => {
       return queryColumn.width
   }
 }
+
+
 const multipleTableRef = ref<TableInstance>()
 const multipleSelection = ref<[]>([])
-
 
 const toggleSelection = (rows?: [], ignoreSelectable?: boolean) => {
   if (rows) {
@@ -142,8 +143,16 @@ const toggleSelection = (rows?: [], ignoreSelectable?: boolean) => {
 }
 const handleSelectionChange = (val: []) => {
   multipleSelection.value = val
-  console.log(tableRef.value?.getRef())
 }
+
+const reflesh=()=>{
+  currentPage.value=1
+  getDataSource()
+}
+
+const getTableData =()=>tableData.value
+
+defineExpose<QueryTableInstance>({reflesh,getTableData })
 </script>
 
 <style lang='scss' scoped></style>

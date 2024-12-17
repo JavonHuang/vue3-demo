@@ -1,5 +1,5 @@
 <template>
-  <el-form v-bind="props" :class="cls" ref="ruleFormRef">
+  <el-form v-bind="$attrs" v-bind:inline="props.inline" :class="cls" ref="ruleFormRef">
     <slot></slot>
   </el-form>
 </template>
@@ -9,11 +9,9 @@ import { defineOptions, computed, ref } from 'vue'
 import { useName } from "../hook/useName"
 import { ElForm, FormInstance } from 'element-plus'
 
-import type { FormProps } from 'element-plus';
-
-type IProps = {
-  [key: string]: any;
-} & FormProps
+interface IProps {
+  inline?:boolean
+} 
 
 defineOptions({
   name: 'ThForm'

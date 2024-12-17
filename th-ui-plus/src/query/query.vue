@@ -1,14 +1,15 @@
 <template>
   <div :class="cls">
-    <th-form ref="ruleFormRef" :style="{height:isExpandHeight+'px'}" :model="ruleForm" :label-width="props.labelWidth" :inline="props.inline">
-      <th-form-item v-for="item in columns" :class="clsFormItem" :inline="props.inline" :key="item.prop" :label="item.label"
-        :prop="item.prop">
-        <slot :name="item.prop" :data="item" :formData="ruleForm" v-if="item.slot"></slot>
-        <component :is="item.type" v-bind="item.props" v-model="ruleForm[item.prop]" v-else></component>
+    <th-form ref="ruleFormRef" :rules="props.rules" :style="{ height: isExpandHeight + 'px' }" :model="ruleFormModel" :label-width="props.labelWidth"
+      :inline="props.inline">
+      <th-form-item v-for="item in columns" :class="clsFormItem" :inline="props.inline" :key="item.prop"
+        :label="item.label" :prop="item.prop">
+        <slot :name="item.prop" :data="item" :formData="ruleFormModel" v-if="item.slot"></slot>
+        <component :is="item.component" v-bind="item.props" v-on="item.event??{}" v-model="ruleFormModel[item.prop]" v-else></component>
       </th-form-item>
     </th-form>
     <div :class="clsSubmit">
-      <th-button :type="'primary'">
+      <th-button :type="'primary'" v-on:click="onQuery">
         <th-icon :class="clsSubmitIcon">
           <Search></Search>
         </th-icon>
@@ -31,31 +32,32 @@
 </template>
 
 <script setup lang='ts'>
-import { defineOptions, computed, watch, ref, reactive, onMounted,nextTick } from 'vue'
+import { defineOptions, computed, watch, ref, onMounted, nextTick } from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue'
 import { useName } from "../hook/useName"
 import { QueryColumnsProps } from './query';
 import * as _ from 'lodash';
 import { FormInstance } from 'element-plus';
+
 import { ThRef } from '../global';
 defineOptions({
   name: 'ThQuery'
 })
-
-const props = defineProps({
-  labelWidth: {
-    type: Number,
-    default: 80
-  },
-  inline: {
-    type: Boolean,
-    default: true
-  },
-  showCount: {
-    type: Number,
-    default: 3
-  },
-  columns: Array<QueryColumnsProps>
+interface IQuery{
+  labelWidth?:number,
+  inline?:boolean,
+  showCount?:number,
+  columns?:Array<QueryColumnsProps>,
+  modelValue?:any,
+  rules?:any
+}
+const props = withDefaults(defineProps<IQuery>(), {
+  labelWidth: 80,
+  inline: false,
+  showCount:3,
+  columns:()=>[],
+  modelValue:{},
+  rules:{}
 })
 
 //样式处理
@@ -67,15 +69,14 @@ const cls = computed(() => [
 
 const isExpandHeight = computed(() => {
   if (isExpand.value) {
-    return Math.ceil(props.columns!.length/props.showCount)*50
-  }else{
+    return Math.ceil(props.columns!.length / props.showCount) * 50
+  } else {
     return 50
   }
-}
-)
+})
 
 const clsFormItem = computed(() => [
-  ns.is(props.inline ?`flex-${Math.floor(24/props.showCount)}`:''),
+  ns.is(props.inline ? `flex-${Math.floor(24 / props.showCount)}` : ''),
 ])
 const clsSubmit = computed(() => [
   ns.m('sure'),
@@ -83,67 +84,73 @@ const clsSubmit = computed(() => [
 const clsSubmitIcon = computed(() => [
   ns.m('icon'),
 ])
-console.log('clsSubmit', clsSubmit)
 //事件处理
-const emits = defineEmits(["update:modelValue"])
+const emits = defineEmits<{
+  (e:'onQuery',val:any):void
+  (e:'update:modelValue',val:any):void
+}>()
 
 //变量声明
 const columns = ref<Array<QueryColumnsProps>>([]);
 const isExpand = ref<boolean>(false)
-const ruleForm = reactive<any>({})
+const ruleFormModel = ref<any>({})
 const ruleFormRef = ref<ThRef<FormInstance>>()
 
 onMounted(() => {
-  nextTick(()=>{
+  nextTick(() => {
     init()
   })
 })
 
-const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log('submit!')
-    } else {
-      console.log('error submit!', fields)
+const showMore = () => {
+  isExpand.value = !isExpand.value
+}
+
+// 初始化数据
+const init = () => {
+  ruleFormModel.value =  _.cloneDeep(props.modelValue ?? {})
+  columns.value = _.cloneDeep(props.columns ?? [])
+  columns.value.forEach((e) => {
+    e.props ?? (e.props = {})
+    switch (e.component) {
+      case 'ThInput':
+        e.props.placeholder = `请输入${e.label}`
+        break;
+      case 'ThSelect':
+        e.props.placeholder = `请选择${e.label}`
+        break;
+      case 'ThDatePicker':
+        e.props.placeholder = `请选择${e.label}`
+        break;
     }
   })
 }
+
+// 监听变化
+watch(() => props.columns, () => {
+  init()
+}, { deep: true });
+
+watch(() => ruleFormModel.value, (newVal) => {
+  emits("update:modelValue", newVal)
+}, { deep: true })
 
 const resetForm = () => {
   console.log(ruleFormRef.value)
   if (!ruleFormRef.value) return
   ruleFormRef.value.getRef().resetFields()
+  onQuery()
 }
 
-const showMore=()=>{
-  isExpand.value=!isExpand.value
+const onQuery=()=>{
+  ruleFormRef.value!.getRef().validate((valid) => {
+    if (valid) {
+      emits("onQuery", ruleFormModel)
+    }
+  })
 }
 
-// 初始化数据
-const init = () => {
-  columns.value = _.cloneDeep(props.columns ?? [])
-  _.map(columns.value, (e) => {
-    ruleForm[e.prop] = e.value
-  });
-}
-
-// 监听变化
-watch(() => props.columns, (newVal, oldVal) => {
-  if (!_.isEqual(newVal, oldVal)) {
-    init()
-  }
-});
-
-watch(() => columns.value, (newVal) => {
-  // const formValue: any = {}
-  // _.map(newVal, (e) => {
-  //   formValue[e.prop] = e.value
-  // });
-  // emits("update:modelValue", formValue)
-}, { deep: true })
-
-defineExpose({ submitForm, resetForm })
+defineExpose({resetForm })
 </script>
 
 

@@ -1,5 +1,5 @@
 <template>
-  <el-config-provider :locale="zhCn" namespace="th">
+  <el-config-provider :locale="zhCn" namespace="el">
     <slot></slot>
   </el-config-provider>
 </template>

@@ -1,7 +1,8 @@
 <template>
   <el-form-item
     :class="cls"
-    v-bind="props"
+    v-bind:inline="props.inline"
+    v-bind="$attrs"
   >
     <slot></slot>
   </el-form-item>

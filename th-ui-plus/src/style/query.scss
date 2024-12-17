@@ -11,7 +11,7 @@
   @include m(line){
     overflow: hidden;
     @include child-level(form){
-      width: calc(100% - 100px);
+      width: calc(100% - 300px);
     }
     flex-direction: row;
     @include child($root,sure){

@@ -1,17 +1,22 @@
-type columnType='ThInput'|'ThDatePicker'|'ThSelect';
-export  interface QueryColumnsProps{
-  type:columnType,
-  slot?:boolean,
-  label:string,
-  prop:string,
-  value:any
-  props?:{
-    [key: string]: any;
-  }
-}
-
+import { columnType } from "../global";
 import { withInstall } from "../withInstall"
 import Query from "./query.vue"
 export const ThQuery = withInstall(Query)
 export type ThQueryProps =  typeof ThQuery
 export default ThQuery
+export  interface QueryColumnsProps{
+  /**
+   * @props 原属性
+   * @event 原事件
+   */
+  component:columnType,
+  slot?:boolean,
+  label:string,
+  prop:string,
+  props?:{
+    [key: string]: any;
+  },
+  event?:{
+    [key: string]: any;
+  },
+}

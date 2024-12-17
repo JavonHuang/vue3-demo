@@ -22,3 +22,14 @@ export interface IQueryTable{
 
 export type ThQueryTableProps =  typeof ThQueryTable 
 export default ThQueryTable
+
+/**
+ * @reflesh 刷新表格数据
+ * @getTableData 获取表格数据源
+ */
+interface QueryTableInstance{
+  reflesh:()=>void,
+  getTableData:()=>Array<any>
+}
+
+export type {QueryTableInstance}

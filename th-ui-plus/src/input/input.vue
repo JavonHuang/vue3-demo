@@ -1,5 +1,6 @@
 <template>
   <el-input
+    clearable
     v-bind="$attrs"
     :class="cls"
   ></el-input>
