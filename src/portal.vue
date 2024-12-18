@@ -70,6 +70,7 @@ const goPage = (e: any) => {
     }
     .contant{
       flex-grow: 1;
+      flex: 1;
       padding: 12px 20px;
       overflow: auto;
       display: flex;

@@ -24,6 +24,11 @@
       width: 100%!important;
     }
   }
+  .#{$orgnamespace}-form-item__label{
+    align-items: center;
+    line-height: 1;
+    text-align: right;
+  }
   .#{$orgnamespace}-date-editor{
     width: 100%!important;
   }

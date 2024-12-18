@@ -34,12 +34,12 @@ export const useGlobalStore = defineStore('global', () => {
           {
             "url": "/demo1_use",
             "path": "/src/pages/common/demo1.vue",
-            "name": "demo1"
+            "name": "列表查询"
           },
           {
             "url": "/demo2_use",
             "path": "/src/pages/common/demo2.vue",
-            "name": "demo2"
+            "name": "表单生成"
           },
           {
             "url": "/report1_use",

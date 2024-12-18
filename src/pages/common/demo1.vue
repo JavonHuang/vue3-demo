@@ -10,7 +10,6 @@
       <template #age="scope">我的年龄：{{ scope.row.age }}</template>
     </th-query-table>
   </th-page-layout>
-  <th-button v-on:click="test"></th-button>
 </template>
 
 <script setup lang='ts'>
@@ -72,8 +71,8 @@ const tableColumns=ref<Array<IQueryColumn>>([
   },
 ])
 const queryModel=reactive({
-  num:'2021-10-29',
-  num2:12,
+  num:'2021',
+  num2:20,
   num3:'21',
   age:new Date().getTime(),
   age1:'2021-10-29',
@@ -132,16 +131,12 @@ const checkAge = (rule: any, value: any, callback: any) => {
     return callback(new Error('Please input the age'))
   }
   setTimeout(() => {
-    if (!Number.isInteger(value)) {
-      callback(new Error('Please input digits'))
+    if (value < 18) {
+      callback(new Error('Age must be greater than 18'))
     } else {
-      if (value < 18) {
-        callback(new Error('Age must be greater than 18'))
-      } else {
-        callback()
-      }
+      callback()
     }
-  }, 1000)
+  }, 100)
 }
 
 

@@ -1,4 +1,4 @@
-import { columnType } from "../global";
+import { columnType } from "../common";
 import { withInstall } from "../withInstall"
 import Query from "./query.vue"
 export const ThQuery = withInstall(Query)

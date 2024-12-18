@@ -1,13 +1,14 @@
 <template>
   <div :class="cls">
     <th-form ref="ruleFormRef" :rules="props.rules" :model="ruleFormModel" :label-width="props.labelWidth">
-      <th-form-item v-for="item in columns" :class="getFormItemClass(item)" :key="item.prop"
-        :label="item.label" :prop="item.prop">
-        <slot :name="item.prop" :data="item" :formData="ruleFormModel" v-if="item.slot"></slot>
-        <component :is="item.component" v-bind="item.props" v-on="item.event??{}" v-model="ruleFormModel[item.prop]" v-else></component>
-      </th-form-item>
+      <template v-for="item in columns" :key="item.prop">
+        <th-form-item  :class="getFormItemClass(item)" :label="item.label" :prop="item.prop" v-if="item.show??true">
+          <slot :name="item.prop" :data="item" :formData="ruleFormModel" v-if="item.slot"></slot>
+          <component :is="item.component" v-bind="item.props" v-on="item.event??{}" v-model="ruleFormModel[item.prop]" v-else></component>
+        </th-form-item>
+      </template>
     </th-form>
-    <div>
+    <div v-if="props.showOperation">
       <th-button :type="'primary'" v-on:click="submit">提交</th-button>
       <th-button :type="'warning'" v-on:click="resetForm">重置</th-button>
     </div>
@@ -19,24 +20,27 @@ import {computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useName } from "../hook/useName"
 import { FormAutoColumnsProps } from './formAuto';
 import { FormInstance } from 'element-plus';
-import { ThRef } from '../global';
+import { ThRef } from '../common';
 import * as _ from 'lodash';
 
 defineOptions({
   name: 'ThTormAuto'
 })
+
 interface IFormAuto{
   labelWidth?:number,
   showCount?:number,
   columns?:Array<FormAutoColumnsProps>,
   modelValue?:any,
-  rules?:any
+  rules?:any,
+  showOperation?:boolean,
 }
 const props = withDefaults(defineProps<IFormAuto>(), {
   labelWidth: 80,
   columns:()=>[],
   modelValue:{},
-  rules:{}
+  rules:{},
+  showOperation:true,
 })
 
 //样式处理
@@ -81,10 +85,15 @@ const init = () => {
 }
 
 const submit=()=>{
-  ruleFormRef.value!.getRef().validate((valid) => {
-    if (valid) {
-      emits("onSubmit", ruleFormModel)
-    }
+  new Promise((resolve, reject)=>{
+    ruleFormRef.value!.getRef().validate((valid,fields) => {
+      if (valid) {
+        resolve(ruleFormModel)
+        emits("onSubmit", ruleFormModel)
+      }else{
+        reject(fields)
+      }
+    })
   })
 }
 

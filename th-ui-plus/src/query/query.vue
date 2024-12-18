@@ -39,7 +39,7 @@ import { QueryColumnsProps } from './query';
 import * as _ from 'lodash';
 import { FormInstance } from 'element-plus';
 
-import { ThRef } from '../global';
+import { ThRef } from '../common';
 defineOptions({
   name: 'ThQuery'
 })

@@ -3,7 +3,9 @@
     v-bind="$attrs"
     :class="cls"
   >
-
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name v-bind="slotData || {}"></slot>
+    </template>
   </el-popover>
 </template>
 

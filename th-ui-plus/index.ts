@@ -178,6 +178,7 @@ export default {
   install
 }
 
+export type {ThRef} from "./src/common.ts"
 export type {QueryColumnsProps} from "./src/query/query.ts"
 export type {IQueryColumn,QueryTableInstance} from './src/queryTable/queryTable.ts'
-export type {FormAutoColumnsProps} from './src/formAuto/formAuto.ts'
+export type {FormAutoColumnsProps,ThFormAutoInstance} from './src/formAuto/formAuto.ts'

@@ -1,4 +1,5 @@
-import { columnType } from "../global"
+import { FormInstance } from "element-plus"
+import { columnType, IComponentEvent, IComponentProps, ThRef } from "../common"
 import { withInstall } from "../withInstall"
 import FormAuto from "./formAuto.vue"
 export const ThFormAuto = withInstall(FormAuto)
@@ -15,12 +16,18 @@ interface FormAutoColumnsProps{
   slot?:boolean,
   label:string,
   prop:string,
-  props?:{
-    [key: string]: any;
-  },
-  event?:{
-    [key: string]: any;
-  },
+  show?:boolean,
+  props?:IComponentProps,
+  event?:IComponentEvent,
 }
 
 export  type {FormAutoColumnsProps}
+
+/**
+ * @onSubmit 表单提交
+ */
+interface ThFormAutoInstance extends ThRef<FormInstance>{
+  onSubmit:()=>Promise<any>,
+}
+
+export type {ThFormAutoInstance}

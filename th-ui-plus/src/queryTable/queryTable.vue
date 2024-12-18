@@ -1,31 +1,51 @@
 <template>
-  <th-table height="100%" :class="cls" :data="tableData" :border="props.border" ref="tableRef"
-    @selection-change="handleSelectionChange">
-    <th-table-column v-if="props.selectable" type="selection" :selectable="selectable" width="55"></th-table-column>
-    <th-table-column :formatter="getColumnFormatter(item)" v-bind="item" :min-width="item.minWidth??80" :width="getColumnWidth(item)"
-      v-for="item in props.columns">
-      <template #default="scope" v-if="item.isSlot">
-        <slot :name="item.prop" v-bind="scope || {}"></slot>
+  <div :class="cls">
+    <div :class="clsheader">
+      <div>
+        <th-button :type="'primary'">新增<th-icon><DocumentAdd/></th-icon></th-button>
+        <th-button>导出</th-button>
+      </div>
+      <th-popover trigger="hover">
+        <template #reference>
+          <th-icon :size="18"><Grid/></th-icon>
+        </template>
+        <div class="el-dropdown-link" v-for="item in props.columns">
+          <th-checkbox :label="item.label" v-model="columnMaps[item.prop]" :value="item.prop" v-on:change="(e)=>change(e,item)"></th-checkbox>
+        </div>
+      </th-popover>
+    </div>
+    <th-table height="100%" :data="tableData" :border="props.border" ref="tableRef"
+      @selection-change="handleSelectionChange">
+      <th-table-column v-if="props.selectable" type="selection" :selectable="selectable" width="55"></th-table-column>
+      <template v-for="item in props.columns" :key="item.prop">
+        <th-table-column v-if="showColumn(item)" :formatter="getColumnFormatter(item)" v-bind="item" :min-width="item.minWidth??80" :width="getColumnWidth(item)">
+          <template #default="scope" v-if="item.isSlot">
+            <slot :name="item.prop" v-bind="scope || {}"></slot>
+          </template>
+        </th-table-column>
       </template>
-    </th-table-column>
-  </th-table>
-  <div :class="clsPagination">
-    <th-pagination size="small" v-model:current-page="currentPage" v-model:page-size="pageSize"
-      :page-sizes="[100, 200, 300, 400]" layout="total, sizes, prev, pager, next, jumper" :total="total"
-      @size-change="handleSizeChange" @current-change="handleCurrentChange">
-    </th-pagination>
+
+    </th-table>
+    <div :class="clsPagination">
+      <th-pagination size="small" v-model:current-page="currentPage" v-model:page-size="pageSize"
+        :page-sizes="[100, 200, 300, 400]" layout="total, sizes, prev, pager, next, jumper" :total="total"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange">
+      </th-pagination>
+    </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { ref, computed, onMounted, nextTick,h } from 'vue'
+import { ref, computed, onMounted, nextTick,h, watch } from 'vue'
+import moment from 'moment';
+import {Grid,DocumentAdd} from '@element-plus/icons-vue'
 import { useName } from "../hook/useName"
 import { IQueryColumn, IQueryTable, QueryTableInstance } from './queryTable'
 import { TableInstance } from 'element-plus'
 import NumberColumn from './component/numberColumn.vue'
 import ThousandsColumn from './component/thousandsColumn.vue'
-import moment from 'moment';
-import { ThRef } from '../global'
+
+import { ThRef } from '../common'
 
 defineOptions({
   name: 'ThQueryTable'
@@ -41,21 +61,48 @@ const ns = useName('query-table')
 const cls = computed(() => [
   ns.base(),
 ])
-
+const clsheader = computed(() => [
+  ns.m('header'),
+])
 const clsPagination = computed(() => [
   ns.m('pagination'),
 ])
 const tableRef=ref<ThRef<TableInstance>>()
 const tableData = ref([])
+const columnMaps = ref<any>({})
 const currentPage = ref(1)
 const pageSize = ref(100)
 const total = ref(0)
 
+watch(() => props.columns, () => {
+  initColumnMaps()
+}, { deep: true })
+
 onMounted(() => {
+  initColumnMaps()
   nextTick(() => {
     getDataSource()
   })
 })
+
+const initColumnMaps=()=>{
+  props.columns.forEach((e:IQueryColumn)=>{
+    columnMaps.value[e.prop]=true
+  })
+}
+initColumnMaps()
+
+const change=(e:boolean|any,i:IQueryColumn)=>{
+  columnMaps.value[i.prop]=e
+  nextTick(()=>{
+    tableRef.value?.getRef().doLayout()
+  })
+}
+
+const showColumn=(i:IQueryColumn)=>{
+  if(!i)return true
+  return columnMaps.value[i.prop]??true
+}
 
 const getDataSource = () => {
   const obj = getParams()

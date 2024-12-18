@@ -3,11 +3,21 @@
 @use 'sass:map';
 
  @include base(query-table) {
+  display: flex;
+  flex-direction: column;
   @include m(pagination){
     margin: 10px 0 0 auto;
-    // margin-right: 0;
   }
-  
+  @include m(header){
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    @include child-level(icon){
+      margin-left: 4px;
+    }
+  }
   @include m(number-column){
     font-weight: bold;
   }

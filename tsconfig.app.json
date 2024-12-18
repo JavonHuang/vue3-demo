@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "types": [
-      // "th-ui-plus/lib/components.d.ts"
+      // "th-ui-plus/lib/components.d.ts" //实际包引入需要放开
     ],
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
