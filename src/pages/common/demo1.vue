@@ -78,7 +78,7 @@ const tableColumns=ref<Array<IQueryTableColumn>>([
         prop:'name',
         label:'文本',
         width:180,
-        // isSlot:true,
+        isSlot:true,
       }
     ]
   },
