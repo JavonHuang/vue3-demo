@@ -28,6 +28,7 @@ import {ThFormItemProps} from './src/form/formItem'
 import {ThIconProps} from './src/icon/icon'
 import {ThImageProps} from './src/image/image'
 import {ThInputProps} from './src/input/input'
+import {ThLinkProps} from './src/link/link'
 import {ThMentionProps} from './src/mention/mention'
 import {ThMenuProps} from './src/menu/menu'
 import {ThInputNumberProps} from './src/number/number'
@@ -98,6 +99,7 @@ declare module 'vue' {
     ThIcon:ThIconProps,
     ThImage:ThImageProps,
     ThInput:ThInputProps,
+    ThLink:ThLinkProps,
     ThMention:ThMentionProps,
     ThMenu:ThMenuProps,
     ThInputNumber:ThInputNumberProps,

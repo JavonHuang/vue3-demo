@@ -5,7 +5,7 @@
         <th-input v-model="formData[data.prop]"></th-input>
       </template>
     </th-query>
-    <th-query-table ref="queryTableRef" :selectable="true" :api="API.table" :columns="tableColumns">
+    <th-query-table ref="queryTableRef" :border="true" :selectable="true" :api="API.table" :columns="tableColumns">
       <template #name="scope">我的名字：{{ scope.row.name }}</template>
       <template #age="scope">我的年龄：{{ scope.row.age }}</template>
     </th-query-table>
@@ -16,14 +16,40 @@
 import { QueryColumnsProps } from 'th-ui-plus';
 import { ref,reactive } from 'vue';
 import API from "@/api/commonApi"
-import { IQueryColumn, QueryTableInstance } from 'th-ui-plus';
+import { IQueryTableColumn, QueryTableInstance } from 'th-ui-plus';
 
-const tableColumns=ref<Array<IQueryColumn>>([
+const tableColumns=ref<Array<IQueryTableColumn>>([
+  {
+    // columnType:'link',
+    // prop:'name',
+    label:'超链接',
+    // width:180,
+    children:[
+      {
+        columnType:'link',
+        prop:'name',
+        label:'超链接2',
+        width:180,
+      },
+      {
+        // columnType:'link',
+        prop:'name',
+        label:'超链接23',
+        width:180,
+      },
+      {
+        // columnType:'link',
+        prop:'name',
+        label:'超链接23',
+        width:180,
+      }
+    ]
+  },
   {
     columnType:'text',
     prop:'name',
     label:'文本',
-    width:180,
+    // width:180,
     isSlot:true,
   },
   {

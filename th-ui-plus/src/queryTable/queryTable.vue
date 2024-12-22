@@ -10,22 +10,19 @@
           <th-icon :size="18"><Grid/></th-icon>
         </template>
         <div class="el-dropdown-link" v-for="item in props.columns">
-          <th-checkbox :label="item.label" v-model="columnMaps[item.prop]" :value="item.prop" v-on:change="(e)=>change(e,item)"></th-checkbox>
+          <th-checkbox :label="item.label" v-model="columnMaps[item.prop??'']" :value="item.prop" v-on:change="(e)=>change(e,item)"></th-checkbox>
         </div>
       </th-popover>
     </div>
     <th-table height="100%" :data="tableData" :border="props.border" ref="tableRef"
       @selection-change="handleSelectionChange">
       <th-table-column v-if="props.selectable" type="selection" :selectable="selectable" width="55"></th-table-column>
-      <template v-for="item in props.columns" :key="item.prop">
-        <th-table-column v-if="showColumn(item)" :formatter="getColumnFormatter(item)" v-bind="item" :min-width="item.minWidth??80" :width="getColumnWidth(item)">
-          <template #default="scope" v-if="item.isSlot">
-            <slot :name="item.prop" v-bind="scope || {}"></slot>
-          </template>
-        </th-table-column>
-      </template>
-
-    </th-table>
+      <tree-column :children="item.children" v-bind="item" v-for="item in props.columns">
+        <template v-for="(_, name) in $slots" #[name]="slotData">
+          <slot :name v-bind="slotData || {}"></slot>
+        </template>
+      </tree-column>
+    </th-table> 
     <div :class="clsPagination">
       <th-pagination size="small" v-model:current-page="currentPage" v-model:page-size="pageSize"
         :page-sizes="[100, 200, 300, 400]" layout="total, sizes, prev, pager, next, jumper" :total="total"
@@ -37,13 +34,11 @@
 
 <script setup lang='ts'>
 import { ref, computed, onMounted, nextTick,h, watch } from 'vue'
-import moment from 'moment';
 import {Grid,DocumentAdd} from '@element-plus/icons-vue'
 import { useName } from "../hook/useName"
-import { IQueryColumn, IQueryTable, QueryTableInstance } from './queryTable'
+import { IQueryTableColumn, IQueryTable, QueryTableInstance } from './queryTable'
 import { TableInstance } from 'element-plus'
-import NumberColumn from './component/numberColumn.vue'
-import ThousandsColumn from './component/thousandsColumn.vue'
+import TreeColumn from './component/treeColumn.vue'
 
 import { ThRef } from '../common'
 
@@ -86,22 +81,22 @@ onMounted(() => {
 })
 
 const initColumnMaps=()=>{
-  props.columns.forEach((e:IQueryColumn)=>{
-    columnMaps.value[e.prop]=true
+  props.columns.forEach((e:IQueryTableColumn)=>{
+    columnMaps.value[e.prop??'']=true
   })
 }
 initColumnMaps()
 
-const change=(e:boolean|any,i:IQueryColumn)=>{
-  columnMaps.value[i.prop]=e
+const change=(e:boolean|any,i:IQueryTableColumn)=>{
+  columnMaps.value[i.prop??'']=e
   nextTick(()=>{
     tableRef.value?.getRef().doLayout()
   })
 }
 
-const showColumn=(i:IQueryColumn)=>{
+const showColumn=(i:IQueryTableColumn)=>{
   if(!i)return true
-  return columnMaps.value[i.prop]??true
+  return columnMaps.value[i.prop??'']??true
 }
 
 const getDataSource = () => {
@@ -129,47 +124,6 @@ const handleCurrentChange = () => {
 
 const selectable = (row: any) => true
 
-const getColumnFormatter = (queryColumn: IQueryColumn) => {
-  return (row: any, column: any, cellValue: any, index: number) => {
-    switch (queryColumn.columnType) {
-      case 'year':
-        return moment(cellValue).format('yyyy')
-      case 'month':
-        return moment(cellValue).format('MM').replace('0',(match, index, _string)=>{
-          return index === 0 ? '' : match; 
-        })
-      case 'date':
-        return moment(cellValue).format('yyyy-MM-DD')
-      case 'dateTime':
-        return moment(cellValue).format('yyyy-MM-DD HH:mm:ss')
-      case 'time':
-        return moment(cellValue).format('HH:mm:ss')
-      case 'number':
-        return h(NumberColumn,{row,column,cellValue,index})
-      case 'thousands':
-        return h(ThousandsColumn,{row,column,cellValue,index})
-      default:
-        return cellValue
-    }
-  }
-}
-
-const getColumnWidth = (queryColumn: IQueryColumn) => {
-  switch (queryColumn.columnType) {
-    case 'year':
-      return 60
-    case 'month':
-      return 50
-    case 'date':
-      return 110
-    case 'dateTime':
-      return 170
-    case 'time':
-      return 90
-    default:
-      return queryColumn.width
-  }
-}
 
 
 const multipleTableRef = ref<TableInstance>()

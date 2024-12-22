@@ -3,19 +3,20 @@ import { withInstall } from "../withInstall"
 import QueryTable from "./queryTable.vue"
 export const ThQueryTable = withInstall(QueryTable)
 
-export type IQueryColumn={
+export type IQueryTableColumn={
   isSlot?:Boolean,
-  columnType?:'text'|'number'|'thousands'|'year'|'month'|'date'|'dateTime'|'time'
-  prop:string,
+  columnType?:'text'|'number'|'thousands'|'year'|'month'|'date'|'dateTime'|'time'|'link'
+  prop?:string,
   label:string,
   width?:number,
   minWidth?:number,
   fixed?:string,
+  children?:Array<IQueryTableColumn>,
 }
 
 export interface IQueryTable{
   api:(e:any)=> Promise<any>,
-  columns: Array<IQueryColumn>,
+  columns: Array<IQueryTableColumn>,
   selectable?:boolean,
   border?:boolean,
 }

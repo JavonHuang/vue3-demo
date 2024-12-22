@@ -30,6 +30,7 @@ import ThFormItem from './src/form/formItem.ts'
 import ThIcon from './src/icon/icon.ts'
 import ThImage from './src/image/image.ts'
 import ThInput from './src/input/input.ts'
+import ThLink from './src/link/link.ts'
 import ThMention from './src/mention/mention.ts'
 import ThMenu from './src/menu/menu.ts'
 import ThMenuItem from './src/menu/menuItem.ts'
@@ -104,6 +105,7 @@ const components: {
   ThIcon,
   ThImage,
   ThInput,
+  ThLink,
   ThMention,
   ThMenu,
   ThMenuItem,
@@ -180,5 +182,5 @@ export default {
 
 export type {ThRef} from "./src/common.ts"
 export type {QueryColumnsProps} from "./src/query/query.ts"
-export type {IQueryColumn,QueryTableInstance} from './src/queryTable/queryTable.ts'
+export type {IQueryTableColumn,QueryTableInstance} from './src/queryTable/queryTable.ts'
 export type {FormAutoColumnsProps,ThFormAutoInstance} from './src/formAuto/formAuto.ts'

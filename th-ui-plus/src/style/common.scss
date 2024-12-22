@@ -1,10 +1,11 @@
 @use 'common/var' as *;
 @use 'mixins/mixins' as *;
 @use 'sass:map';
+@use 'sass:math';
 
 @for $i from 1 through 24 {
   @include is('flex-#{$i}') {
-    width: #{math.percentage((1 / 24)*$i)};
+    width: #{math.percentage(math.div(1, 24)*$i)};
   }
 }
 div{

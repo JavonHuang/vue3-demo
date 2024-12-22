@@ -25,8 +25,12 @@ const columns=ref<Array<FormAutoColumnsProps>>([
     prop:'num',
     span:12,
     props:{
+     
+    },
+    event:{
       change:(e:any)=>{
         console.log('ThInput',e)
+        rules.num[0].required=false
       },
     }
   },
@@ -88,7 +92,6 @@ const columns=ref<Array<FormAutoColumnsProps>>([
 const rules=reactive({
   num: [
     { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { required: true, min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
   ],
 })
 
