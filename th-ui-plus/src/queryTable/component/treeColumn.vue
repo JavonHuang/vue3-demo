@@ -1,15 +1,16 @@
 <template>
-  <th-table-column v-bind="$attrs" :formatter="getColumnFormatter($attrs as IQueryTableColumn)">
+  <el-table-column :class="cls" v-bind="$attrs" :formatter="getColumnFormatter($attrs as IQueryTableColumn)">
     <template #default="scope" v-if="$attrs.isSlot">
       <slot :name="$attrs.prop" v-bind="scope || {}"></slot>
     </template>
     <template v-for="item in props.children" v-if="props.children.length!=0">
       <tree-column v-bind="item">
-        <slot :name v-for="(_, name) in $slots"></slot>
-        <div>4567890-</div>
+        <template v-for="(_, name) in $slots" #[name]="slotData">
+          <slot :name v-bind="slotData || {}"></slot>
+        </template>
       </tree-column>
     </template>
-  </th-table-column>
+  </el-table-column>
 </template>
 
 <script setup lang='ts'>
@@ -19,11 +20,17 @@ import NumberColumn from './../component/numberColumn.vue'
 import ThousandsColumn from './../component/thousandsColumn.vue'
 import TinkColumn from './../component/linkColumn.vue'
 import { ElTableColumn } from 'element-plus'
+import { computed, h } from 'vue';
+import { useName } from '../../hook/useName';
 
-import { h } from 'vue';
 defineOptions({
   name: 'tree-column'
 })
+
+const ns = useName('table-column')
+const cls = computed(() => [
+  ns.base(),
+])
 
 const props = withDefaults(
   defineProps<{

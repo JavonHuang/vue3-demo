@@ -30,6 +30,20 @@ const tableColumns=ref<Array<IQueryTableColumn>>([
         prop:'name',
         label:'超链接2',
         width:180,
+        children:[
+          {
+            columnType:'link',
+            prop:'name',
+            label:'超链超链接23223323接2',
+            width:180,
+          },
+          {
+            columnType:'link',
+            prop:'name',
+            label:'超链接23223323',
+            width:180,
+          },
+        ]
       },
       {
         // columnType:'link',
@@ -47,10 +61,26 @@ const tableColumns=ref<Array<IQueryTableColumn>>([
   },
   {
     columnType:'text',
-    prop:'name',
+    // prop:'name',
     label:'文本',
     // width:180,
-    isSlot:true,
+    // isSlot:true,
+    children:[
+      {
+        columnType:'text',
+        prop:'name',
+        label:'文本',
+        width:180,
+        isSlot:true,
+      },
+      {
+        columnType:'text',
+        prop:'name',
+        label:'文本',
+        width:180,
+        // isSlot:true,
+      }
+    ]
   },
   {
     columnType:'year',
