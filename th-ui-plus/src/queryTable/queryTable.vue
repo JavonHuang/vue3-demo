@@ -9,15 +9,13 @@
         <template #reference>
           <th-icon :size="18"><Grid/></th-icon>
         </template>
-        <div class="el-dropdown-link" v-for="item in props.columns">
-          <th-checkbox :label="item.label" v-model="columnMaps[item.prop??'']" :value="item.prop" v-on:change="(e)=>change(e,item)"></th-checkbox>
-        </div>
+        <th-tree v-on:check-change="checkChange" ref="treeRef" :data="columns" :props="defaultProps" node-key="id" show-checkbox :default-checked-keys="defaultColumnsShowList"></th-tree>
       </th-popover>
     </div>
     <th-table height="100%" :data="tableData" :border="props.border" ref="tableRef"
       @selection-change="handleSelectionChange">
       <th-table-column v-if="props.selectable" type="selection" :selectable="selectable" width="55"></th-table-column>
-      <tree-column :children="item.children" v-bind="item" v-for="item in props.columns">
+      <tree-column :column-show="columnsShowList" :children="item.children" v-bind="item" v-for="item in columns">
         <template v-for="(_, name) in $slots" #[name]="slotData">
           <slot :name v-bind="slotData || {}"></slot>
         </template>
@@ -41,7 +39,12 @@ import { TableInstance } from 'element-plus'
 import TreeColumn from './component/treeColumn.vue'
 
 import { ThRef } from '../common'
-
+import { cloneTree, generateID } from '../tool'
+import ThTree, { TreeInstance } from '../tree/tree'
+const defaultProps = {
+  children: 'children',
+  label: 'label',
+}
 defineOptions({
   name: 'ThQueryTable'
 })
@@ -64,10 +67,14 @@ const clsPagination = computed(() => [
 ])
 const tableRef=ref<ThRef<TableInstance>>()
 const tableData = ref([])
-const columnMaps = ref<any>({})
 const currentPage = ref(1)
 const pageSize = ref(100)
 const total = ref(0)
+const columns = ref<Array<IQueryTableColumn>>([])
+const defaultColumnsShowList = ref<Array<any>>([])
+const columnsShowList = ref<Array<any>>([])
+const treeRef = ref<ThRef<TreeInstance>>()
+
 
 watch(() => props.columns, () => {
   initColumnMaps()
@@ -81,22 +88,34 @@ onMounted(() => {
 })
 
 const initColumnMaps=()=>{
-  props.columns.forEach((e:IQueryTableColumn)=>{
-    columnMaps.value[e.prop??'']=true
+  defaultColumnsShowList.value=[]
+  columnsShowList.value=[]
+  columns.value = cloneTree(props.columns,(e:any)=>{
+    if(typeof e.show ==='undefined' || e.show){
+      e.show=true
+      e['id']=generateID()
+      defaultColumnsShowList.value.push(e['id'])
+      columnsShowList.value.push(e['id'])
+    }else{
+      e.show=false
+    }
   })
 }
 initColumnMaps()
 
 const change=(e:boolean|any,i:IQueryTableColumn)=>{
-  columnMaps.value[i.prop??'']=e
   nextTick(()=>{
     tableRef.value?.getRef().doLayout()
   })
 }
 
-const showColumn=(i:IQueryTableColumn)=>{
-  if(!i)return true
-  return columnMaps.value[i.prop??'']??true
+const checkChange=()=>{
+  const nodes= treeRef.value?.getRef().getCheckedKeys()
+  const nodesHalf= treeRef.value?.getRef().getHalfCheckedKeys()
+  columnsShowList.value = [...nodes as Array<string>,...nodesHalf as Array<string>]
+  nextTick(()=>{
+    tableRef.value?.getRef().doLayout()
+  })
 }
 
 const getDataSource = () => {
@@ -142,6 +161,7 @@ const toggleSelection = (rows?: [], ignoreSelectable?: boolean) => {
     multipleTableRef.value!.clearSelection()
   }
 }
+
 const handleSelectionChange = (val: []) => {
   multipleSelection.value = val
 }

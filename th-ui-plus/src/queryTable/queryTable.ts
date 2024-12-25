@@ -6,11 +6,12 @@ export const ThQueryTable = withInstall(QueryTable)
 export type IQueryTableColumn={
   isSlot?:Boolean,
   columnType?:'text'|'number'|'thousands'|'year'|'month'|'date'|'dateTime'|'time'|'link'
-  prop?:string,
+  prop:string,
   label:string,
   width?:number,
   minWidth?:number,
   fixed?:string,
+  show?:boolean,
   children?:Array<IQueryTableColumn>,
 }
 

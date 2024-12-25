@@ -21,7 +21,7 @@ import { IQueryTableColumn, QueryTableInstance } from 'th-ui-plus';
 const tableColumns=ref<Array<IQueryTableColumn>>([
   {
     // columnType:'link',
-    // prop:'name',
+    prop:'name',
     label:'超链接',
     // width:180,
     children:[
@@ -61,23 +61,23 @@ const tableColumns=ref<Array<IQueryTableColumn>>([
   },
   {
     columnType:'text',
-    // prop:'name',
-    label:'文本',
+    prop:'name',
+    label:'文本父级',
     // width:180,
     // isSlot:true,
     children:[
       {
         columnType:'text',
         prop:'name',
-        label:'文本',
-        width:180,
+        label:'文本1',
+        // width:180,
         isSlot:true,
       },
       {
         columnType:'text',
         prop:'name',
-        label:'文本',
-        width:180,
+        label:'文本2',
+        // width:180,
         isSlot:true,
       }
     ]
@@ -96,6 +96,7 @@ const tableColumns=ref<Array<IQueryTableColumn>>([
     columnType:'date',
     prop:'date',
     label:'日',
+    fixed:'right'
   },
   {
     columnType:'dateTime',

@@ -17,6 +17,7 @@
     "vue-tsc": "^2.1.10"
   },
   "dependencies": {
-    "element-plus": "^2.9.0"
+    "element-plus": "^2.9.0",
+    "lodash": "^4.17.21"
   }
 }

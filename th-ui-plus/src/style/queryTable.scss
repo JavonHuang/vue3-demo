@@ -1,6 +1,7 @@
 @use 'common/var' as *;
 @use 'mixins/mixins' as *;
 @use 'sass:map';
+@use 'mixins/config' as *;
 
  @include base(query-table) {
   display: flex;
@@ -16,6 +17,12 @@
     padding-bottom: 8px;
     @include child-level(icon){
       margin-left: 4px;
+    }
+  }
+  @include child-level(table){
+    height: 100%;
+    .#{$orgnamespace}-scrollbar__wrap{
+      text-align: justify;
     }
   }
   @include m(number-column){
