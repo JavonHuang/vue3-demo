@@ -3,13 +3,16 @@
     <th-form-auto :label-width="120" :show-operation="false" v-model="queryModel" :columns="columns" :rules="rules">
     </th-form-auto>
   </th-page-layout>
+  <th-button v-on:click="changeByhook">hook方式改变</th-button>
 </template>
 
 <script setup lang='ts'>
 import { FormAutoColumnsProps, ThFormAutoInstance } from 'th-ui-plus';
+import {useFormAuto} from '@/../th-ui-plus'
+
 import { ref,reactive } from 'vue';
 const formRef=ref<ThFormAutoInstance>()
-const queryModel=reactive({
+const queryModel=ref({
   num:'2021-10-29',
   num2:20,
   num3:null,
@@ -17,7 +20,7 @@ const queryModel=reactive({
   age1:'2021-10-29',
   age2:'2021-10-29',
 })
-
+const disabled=ref(false)
 const columns=ref<Array<FormAutoColumnsProps>>([
   {
     component:'ThInput',
@@ -25,12 +28,15 @@ const columns=ref<Array<FormAutoColumnsProps>>([
     prop:'num',
     span:12,
     props:{
-     
+     disabled:disabled
     },
     event:{
       change:(e:any)=>{
         console.log('ThInput',e)
         rules.num[0].required=false
+        disabled.value=true
+        formAuto.updateColumnProps('num3','disabled',true)
+        console.log(queryModel)
       },
     }
   },
@@ -89,12 +95,17 @@ const columns=ref<Array<FormAutoColumnsProps>>([
   }
 ])
 
+const formAuto=useFormAuto(columns)
+
 const rules=reactive({
   num: [
     { required: true, message: 'Please input Activity name', trigger: 'blur' },
   ],
 })
 
+const changeByhook=()=>{
+  formAuto.updateColumn('num','label','测试label')
+}
 </script>
 
 <style lang='scss' scoped>

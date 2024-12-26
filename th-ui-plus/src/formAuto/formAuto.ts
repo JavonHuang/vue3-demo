@@ -21,7 +21,7 @@ interface FormAutoColumnsProps{
   event?:IComponentEvent,
 }
 
-export  type {FormAutoColumnsProps}
+export type {FormAutoColumnsProps}
 
 /**
  * @onSubmit 表单提交
