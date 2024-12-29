@@ -35,7 +35,7 @@ const columns=ref<Array<FormAutoColumnsProps>>([
         console.log('ThInput',e)
         rules.num[0].required=false
         disabled.value=true
-        formAuto.updateColumnProps('num3','disabled',true)
+        formAuto.setColumnProps('num3','disabled',true)
         console.log(queryModel)
       },
     }
@@ -104,7 +104,7 @@ const rules=reactive({
 })
 
 const changeByhook=()=>{
-  formAuto.updateColumn('num','label','测试label')
+  formAuto.setColumn('num','label','测试label')
 }
 </script>
 
