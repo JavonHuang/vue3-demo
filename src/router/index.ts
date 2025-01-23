@@ -13,6 +13,18 @@ const routes: Array<RouteRecordRaw> = [
     component:()=>import('@/login.vue')
   },
   {
+    path:"/design",
+    name: "design",
+    component:()=>import('@/designPortal.vue'),
+    children:[
+      {
+        path:"/design/index",
+        name: "design_index",
+        component:()=>import('@/pages/design/index.vue')
+      },
+    ]
+  },
+  {
     path:"/",
     name: "portal",
     component:()=>import('@/portal.vue'),

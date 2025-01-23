@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import drag from "@/tool/drag.ts"
+
 import './style.css'
 // import ThUI from 'th-ui-plus'
 import ThUI from './../th-ui-plus/index'
@@ -14,6 +16,8 @@ console.log(import.meta.env)
 import { router } from '@/router/index'
 import pinia from '@/store/index'
 const app=createApp(Main)
+app.directive('drag', drag)
+
 // app.use(ElementPlus)
 // app.use(DBelement)
 app.use(ThUI)
